@@ -21,17 +21,20 @@ public class ClientHandler implements Runnable {
     public void run() {
         try{
             while(true){
-
+                String line = in.readLine();
+                out.println(line);
+                System.out.println("Client : "+line);
             }
+        } catch (IOException e) {
+            System.err.println("IO exception in client handler");
+            System.err.println(e.getStackTrace());
         } finally {
-            out.close();
-
+                out.close();
             try {
                 in.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }
