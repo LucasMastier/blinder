@@ -10,6 +10,6 @@ module com.example.blinder {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.example.blinder to javafx.fxml;
-    exports com.example.blinder;
+    opens blinderGUI to javafx.fxml;
+    exports blinderGUI;
 }

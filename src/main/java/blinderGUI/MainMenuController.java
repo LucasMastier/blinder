@@ -1,4 +1,4 @@
-package com.example.blinder;
+package blinderGUI;
 
 public class MainMenuController {
 }
