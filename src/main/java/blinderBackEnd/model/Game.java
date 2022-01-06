@@ -18,7 +18,7 @@ public class Game {
     public String toString(){
         String res="";
         for (Player p: list_player) {
-            res = p.toString()+"\n";
+            res += p.toString()+"\n";
         }
         return res;
     }
@@ -29,4 +29,5 @@ public class Game {
             }
         }
     }
+
 }

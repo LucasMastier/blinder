@@ -16,13 +16,25 @@ public class Playlist {
     public Playlist(String titre){
         this.titre = titre;
     }
-
+    public String getTitre() {
+        return titre;
+    }
     public void addToPlaylist(Song song){
         playlist.add(song);
     }
-
+    public void removetoPlaylist(Song song){
+        playlist.remove(song);
+    }
     public List<Song> getPlaylist(Song song){
         return playlist;
+    }
+
+    public String toString(){
+        String res="";
+        for (Song s: playlist) {
+            res+=s.toString()+"\n";
+        }
+        return res;
     }
 
 }
