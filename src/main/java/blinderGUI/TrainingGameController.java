@@ -1,5 +1,6 @@
 package blinderGUI;
 
+import blinderBackEnd.model.PlaylistService;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -20,10 +21,11 @@ public class TrainingGameController {
     private TilePane buttonsContainer;
 
     public void addButtons(ActionEvent event){
-        /*String bip = "fichier.mp3";
-        Media hit = new Media(new File(bip).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.setAutoPlay(true);*/
+
+    }
+
+    public void playSong(ActionEvent event){
+        PlaylistService.playRandomSongFromPlaylist();
     }
     
 }

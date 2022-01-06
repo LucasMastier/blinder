@@ -9,6 +9,7 @@ module com.example.blinder {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires javafx.media;
 
     opens blinderGUI to javafx.fxml;
     exports blinderGUI;

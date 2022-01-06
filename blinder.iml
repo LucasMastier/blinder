@@ -38,11 +38,31 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/main/resources/jar_files_1.zip!/" />
+          <root url="jar://$MODULE_DIR$/jardependencies/javafx-base-17.0.2-ea+2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="jar://$MODULE_DIR$/src/main/resources/jar_files_1.zip!/" recursive="false" />
+        <jarDirectory url="jar://$MODULE_DIR$/jardependencies/javafx-base-17.0.2-ea+2.jar!/" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/jardependencies/javafx-graphics-17.0.2-ea+2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="jar://$MODULE_DIR$/jardependencies/javafx-graphics-17.0.2-ea+2.jar!/" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/jardependencies/javafx-media-17.0.2-ea+2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="jar://$MODULE_DIR$/jardependencies/javafx-media-17.0.2-ea+2.jar!/" recursive="false" />
       </library>
     </orderEntry>
   </component>
