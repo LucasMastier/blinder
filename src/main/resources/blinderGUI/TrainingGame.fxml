@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="blinderGUI.TrainingGame"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="681.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blinderGUI.TrainingGameController">
+   <children>
+      <Label alignment="CENTER" layoutX="354.0" layoutY="85.0" prefHeight="17.0" prefWidth="392.0" text="Qui est l'auteur ?" />
+      <TilePane fx:id="buttonsContainer" layoutX="255.0" layoutY="141.0" prefHeight="399.0" prefWidth="591.0" />
+   </children>
 </AnchorPane>
