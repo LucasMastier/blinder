@@ -25,7 +25,7 @@ public class Playlist {
     public void removetoPlaylist(Song song){
         playlist.remove(song);
     }
-    public List<Song> getPlaylist(Song song){
+    public List<Song> getPlaylist(){
         return playlist;
     }
 
