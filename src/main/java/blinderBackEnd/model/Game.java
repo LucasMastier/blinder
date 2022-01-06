@@ -16,7 +16,7 @@ public class Game {
         list_player.remove(j);
     }
     public String toString(){
-        String res="";
+        String res="tableau des scores: \n";
         for (Player p: list_player) {
             res += p.toString()+"\n";
         }
