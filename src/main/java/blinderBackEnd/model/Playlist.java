@@ -11,4 +11,8 @@ public class Playlist {
         playlist.add(song);
     }
 
+    public List<Song> getPlaylist(Song song){
+        return playlist;
+    }
+
 }
