@@ -20,7 +20,7 @@ public class MainMenuController {
 
         //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(),1920,1080);
+        Scene scene = new Scene(fxmlLoader.load(),800,500);
 
         stage.setScene(scene);
         stage.show();

@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static blinderBackEnd.model.PlaylistService.getRandomAuthorFromPlaylist;
 
@@ -31,6 +32,7 @@ public class TrainingGameController {
 
     private List<Button> buttonList = new ArrayList<>();
 
+    @FXML
     public void initialize(){
         int compt = 0;
         while(compt != 4){
@@ -43,6 +45,31 @@ public class TrainingGameController {
                 public void handle(Event event) {
                     if(PlaylistService.checkAuthor(button.getText())){
                         answerLabel.setText("Bonne réponse !");
+
+                        try {
+                            TimeUnit.SECONDS.sleep(3);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Stage stage = (Stage) button.getScene().getWindow();
+                        stage.close();
+                        PlaylistService.mediaPlayer.stop();
+
+                        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+
+                        //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+                        Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene scene = null;
+                        try {
+                            scene = new Scene(fxmlLoader.load(),800,500);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        newStage.setScene(scene);
+                        newStage.show();
+
+
                     } else {
                         answerLabel.setText("Mauvaise réponse");
                     }

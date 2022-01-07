@@ -26,7 +26,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(page));
 
         Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load(),1920,1080);
+        Scene scene = new Scene(fxmlLoader.load(),800,500);
 
         stage.setScene(scene);
         stage.show();

@@ -11,6 +11,7 @@ public class PlaylistService {
     private static Playlist currentPlaylist;
     private static Song currentSong;
     private static ArrayList<Integer> randomValues = new ArrayList<>();
+    public static MediaPlayer mediaPlayer;
 
     public static void playRandomSongFromPlaylist(Playlist playlist){
         int randomNumber = (int)(Math.random() * ((playlist.getPlaylist().size())));
@@ -21,7 +22,7 @@ public class PlaylistService {
 
     public static void playSongFromPlaylist(String path){
         Media hit = new Media(new File(path).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        mediaPlayer = new MediaPlayer(hit);
         mediaPlayer.setAutoPlay(true);
     }
 
@@ -34,9 +35,9 @@ public class PlaylistService {
             randomValues.add(i);
         }
         Collections.shuffle(randomValues);
+        
         for(int i = 0; i < 4; i++){
             randomAuthors.add(playlist.getPlaylist().get(i).getAuteur());
-            System.out.println(randomAuthors.get(i));
         }
         return randomAuthors;
     }
