@@ -34,10 +34,10 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        Song vvs = new Song("Ninho","VVS", "C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\mp3files\\VVS.mp3");
-        Song tr = new Song("Leto","Tout recommencer", "C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\mp3files\\Tout_recommencer.mp3");
-        Song fr = new Song("Freeze Corleone","Freeze raël", "C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\mp3files\\Freeze_Rael.mp3");
-        Song hs = new Song("Hamza","HS", "C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\mp3files\\HS.mp3");
+        Song vvs = new Song("Ninho","VVS", "src/main/resources/mp3files/VVS.mp3");
+        Song tr = new Song("Leto","Tout recommencer", "src/main/resources/mp3files/Tout_recommencer.mp3");
+        Song fr = new Song("Freeze Corleone","Freeze raël", "src/main/resources/mp3files/Freeze_Rael.mp3");
+        Song hs = new Song("Hamza","HS", "src/main/resources/mp3files/HS.mp3");
 
         Playlist rap = new Playlist("Rap");
         rap.addToPlaylist(vvs);
