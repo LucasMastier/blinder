@@ -35,13 +35,13 @@ public class TrainingGameController {
         int compt = 0;
         while(compt != 4){
 
-            String author = getRandomAuthorFromPlaylist(PlaylistService.getCurrentPlaylist());
-            Button button = new Button(author);
+            ArrayList<String> author = getRandomAuthorFromPlaylist(PlaylistService.getCurrentPlaylist());
+            Button button = new Button(author.get(compt));
             button.setOnAction(new EventHandler() {
 
                 @Override
                 public void handle(Event event) {
-                    if(PlaylistService.checkAuthor(author)){
+                    if(PlaylistService.checkAuthor(button.getText())){
                         answerLabel.setText("Bonne réponse !");
                     } else {
                         answerLabel.setText("Mauvaise réponse");
@@ -50,11 +50,23 @@ public class TrainingGameController {
 
             });
             buttonList.add(button);
+
             compt++;
         }
         buttonsContainer.getChildren().clear();
         buttonsContainer.getChildren().addAll(buttonList);
         PlaylistService.playRandomSongFromPlaylist(PlaylistService.getCurrentPlaylist());
+        boolean goodAnswerIsAvailable = false;
+        for(int i = 0; i < buttonList.size(); i++){
+            if(buttonList.get(i).getText().equals(PlaylistService.getCurrentSong().getAuteur())){
+                goodAnswerIsAvailable = true;
+            }
+        }
+        if(!goodAnswerIsAvailable){
+            int random = (int) (Math.random() * buttonList.size());
+            buttonList.get(random).setText(PlaylistService.getCurrentSong().getAuteur());
+        }
+
     }
 
     public void playSong(ActionEvent event){

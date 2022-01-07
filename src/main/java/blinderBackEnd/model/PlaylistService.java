@@ -4,10 +4,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class PlaylistService {
     private static Playlist currentPlaylist;
     private static Song currentSong;
+    private static ArrayList<Integer> randomValues = new ArrayList<>();
 
     public static void playRandomSongFromPlaylist(Playlist playlist){
         int randomNumber = (int)(Math.random() * ((playlist.getPlaylist().size())));
@@ -22,9 +25,20 @@ public class PlaylistService {
         mediaPlayer.setAutoPlay(true);
     }
 
-    public static String getRandomAuthorFromPlaylist(Playlist playlist){
-        int randomNumber = (int)(Math.random() * ((playlist.getPlaylist().size())));
-        return playlist.getPlaylist().get(randomNumber).getAuteur();
+    public static ArrayList<String> getRandomAuthorFromPlaylist(Playlist playlist){
+        ArrayList<String> randomAuthors = new ArrayList<>();
+
+
+        int playlistSize = PlaylistService.getCurrentPlaylist().getPlaylist().size();
+        for (int i = 0; i < playlistSize; i++) {
+            randomValues.add(i);
+        }
+        Collections.shuffle(randomValues);
+        for(int i = 0; i < 4; i++){
+            randomAuthors.add(playlist.getPlaylist().get(i).getAuteur());
+            System.out.println(randomAuthors.get(i));
+        }
+        return randomAuthors;
     }
 
     public static void setCurrentPlaylist(Playlist playlist){
@@ -37,6 +51,10 @@ public class PlaylistService {
 
     public static void setCurrentSong(Song song){
         currentSong = song;
+    }
+
+    public static Song getCurrentSong(){
+        return currentSong;
     }
 
     public static boolean checkAuthor(String author){
