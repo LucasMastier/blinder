@@ -35,9 +35,10 @@ public class TrainingGameController {
     @FXML
     public void initialize(){
         int compt = 0;
+        ArrayList<String> author = getRandomAuthorFromPlaylist(PlaylistService.getCurrentPlaylist());
         while(compt != 4){
 
-            ArrayList<String> author = getRandomAuthorFromPlaylist(PlaylistService.getCurrentPlaylist());
+
             Button button = new Button(author.get(compt));
             button.setOnAction(new EventHandler() {
 

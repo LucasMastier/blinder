@@ -26,18 +26,29 @@ public class PlaylistService {
         mediaPlayer.setAutoPlay(true);
     }
 
-    public static ArrayList<String> getRandomAuthorFromPlaylist(Playlist playlist){
-        ArrayList<String> randomAuthors = new ArrayList<>();
-
+    public static void initializeRandomValues(){
+        randomValues.clear();
 
         int playlistSize = PlaylistService.getCurrentPlaylist().getPlaylist().size();
         for (int i = 0; i < playlistSize; i++) {
             randomValues.add(i);
+            //System.out.println(i);
         }
         Collections.shuffle(randomValues);
-        
+        for (int i = 0; i < playlistSize; i++) {
+            System.out.println(randomValues.get(i));
+        }
+
+    }
+
+    public static ArrayList<String> getRandomAuthorFromPlaylist(Playlist playlist){
+        ArrayList<String> randomAuthors = new ArrayList<>();
+
+        initializeRandomValues();
+
         for(int i = 0; i < 4; i++){
-            randomAuthors.add(playlist.getPlaylist().get(i).getAuteur());
+            randomAuthors.add(playlist.getPlaylist().get(randomValues.get(i)).getAuteur());
+
         }
         return randomAuthors;
     }
