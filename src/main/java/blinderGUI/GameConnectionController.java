@@ -3,6 +3,7 @@ package blinderGUI;
 import blinderBackEnd.model.Game;
 import blinderBackEnd.model.Player;
 import blinderBackEnd.model.PlayerService;
+import blinderBackEnd.model.Playlist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,6 +27,8 @@ public class GameConnectionController {
 
     @FXML
     private boolean isConnected = false;
+
+
 
     private static Player currentPlayer;
 
@@ -51,7 +54,6 @@ public class GameConnectionController {
         }
 
     }
-
 
 
 

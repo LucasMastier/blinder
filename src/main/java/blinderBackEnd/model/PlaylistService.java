@@ -12,12 +12,17 @@ public class PlaylistService {
     private static Song currentSong;
     private static ArrayList<Integer> randomValues = new ArrayList<>();
     public static MediaPlayer mediaPlayer;
+    private static ArrayList<Playlist> playlists = new ArrayList<>();
 
     public static void playRandomSongFromPlaylist(Playlist playlist){
         int randomNumber = (int)(Math.random() * ((playlist.getPlaylist().size())));
         Song randomSong = playlist.getPlaylist().get(randomNumber);
         currentSong = randomSong;
         playSongFromPlaylist(randomSong.getPathToFile());
+    }
+
+    public static void addToPlaylists(Playlist playlist){
+        playlists.add(playlist);
     }
 
     public static void playSongFromPlaylist(String path){
@@ -59,6 +64,10 @@ public class PlaylistService {
 
     public static Playlist getCurrentPlaylist(){
         return currentPlaylist;
+    }
+
+    public static ArrayList<Playlist> getPlaylists(){
+        return playlists;
     }
 
     public static void setCurrentSong(Song song){

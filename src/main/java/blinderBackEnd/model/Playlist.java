@@ -13,6 +13,10 @@ public class Playlist {
         this.playlist = playlist;
     }
 
+    public void addPlaylistToPlaylists(){
+        PlaylistService.addToPlaylists(this);
+    }
+
     public Playlist(String titre){
         this.titre = titre;
     }

@@ -2,8 +2,8 @@ package blinderGUI;
 
 import blinderBackEnd.model.Game;
 import blinderBackEnd.model.GameService;
+import blinderBackEnd.model.Playlist;
 import blinderBackEnd.model.PlaylistService;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,49 +12,42 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import static blinderBackEnd.model.PlaylistService.getRandomAuthorFromPlaylist;
-import static blinderGUI.Main.switchTo;
-
-public class MultiplayerGamesListController {
+public class PlaylistChoiceController {
 
     @FXML
     private TilePane buttonsContainer;
-
-    @FXML
-    private Label answerLabel;
 
     private List<Button> buttonList = new ArrayList<>();
 
     @FXML
     public void initialize(){
-        for(Game game : GameService.getGamesList()){
+        ArrayList<Playlist> playlists = PlaylistService.getPlaylists();
+        for(Playlist playlist : playlists){
 
-            Button button = new Button(game.getName());
+            Button button = new Button(playlist.getTitre());
             button.setOnAction(new EventHandler() {
 
                 @Override
                 public void handle(Event event) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GameConnection.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GameCreation.fxml"));
                     try {
                         Parent root = loader.load();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
-                    GameConnectionController gameConnectionController = loader.getController();
-                    gameConnectionController.storeGameInstance(game);
+                    GameCreationController gameCreationController = loader.getController();
+                    gameCreationController.storePlaylistInstance(playlist);
 
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameConnection.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameCreation.fxml"));
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = null;
                     try {
@@ -72,11 +65,6 @@ public class MultiplayerGamesListController {
         }
         buttonsContainer.getChildren().clear();
         buttonsContainer.getChildren().addAll(buttonList);
-    }
-
-    @FXML
-    public void switchToPlaylistChoice(ActionEvent event) throws IOException {
-        switchTo(event,"PlaylistChoice.fxml");
     }
 
 }

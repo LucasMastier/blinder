@@ -11,6 +11,7 @@ public class Game {
         pl = playlist;
         this.name = name;
     }
+
     public void addPlayer(Player j){
         list_player.add(j);
     }

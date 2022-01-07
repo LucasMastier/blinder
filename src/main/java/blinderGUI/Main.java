@@ -47,6 +47,7 @@ public class Main extends Application {
         rap.addToPlaylist(hs);
 
         PlaylistService.setCurrentPlaylist(rap);
+        PlaylistService.addToPlaylists(rap);
 
         Game game = new Game(rap, "Partie 1");
         GameService.addGameToList(game);

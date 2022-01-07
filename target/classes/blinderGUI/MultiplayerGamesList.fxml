@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,13 +18,14 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="676.0" minHeight="10.0" prefHeight="322.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="559.0" minHeight="10.0" prefHeight="293.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="188.0" minHeight="10.0" prefHeight="188.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="559.0" minHeight="10.0" prefHeight="190.33331298828125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="290.66668701171875" minHeight="10.0" prefHeight="290.66668701171875" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label fx:id="answerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1001.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1079.0" text="Voici la liste des parties disponibles" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <TilePane fx:id="buttonsContainer" prefHeight="293.0" prefWidth="648.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#switchToPlaylistChoice" prefHeight="41.0" prefWidth="139.0" text="Créer une partie" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
