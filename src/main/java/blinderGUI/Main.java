@@ -1,9 +1,9 @@
 package blinderGUI;
 
-import blinderBackEnd.model.Playlist;
-import blinderBackEnd.model.PlaylistService;
-import blinderBackEnd.model.Song;
+import blinderBackEnd.model.*;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,11 +21,12 @@ public class Main extends Application {
         stage.show();
     }
 
-
-    public static void switchTo(String page) throws IOException {
+    @FXML
+    public static void switchTo(ActionEvent event, String page) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(page));
 
-        Stage stage = new Stage();
+        //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),800,500);
 
         stage.setScene(scene);
@@ -47,6 +48,8 @@ public class Main extends Application {
 
         PlaylistService.setCurrentPlaylist(rap);
 
+        Game game = new Game(rap, "Partie 1");
+        GameService.addGameToList(game);
 
         launch();
     }

@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static blinderGUI.Main.switchTo;
+
 public class MainMenuController {
     @FXML
     private Button trainingModeButton;
@@ -18,12 +20,16 @@ public class MainMenuController {
     public void switchToTrainingMode(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
 
-        //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),800,500);
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void switchToMultiplayerMode(ActionEvent event) throws IOException {
+        switchTo(event, "MultiplayerGamesList.fxml");
     }
 
 }

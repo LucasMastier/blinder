@@ -58,8 +58,6 @@ public class TrainingGameController {
                         PlaylistService.mediaPlayer.stop();
 
                         FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
-
-                        //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
                         Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene scene = null;
                         try {
