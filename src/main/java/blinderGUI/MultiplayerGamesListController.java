@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,7 +34,6 @@ public class MultiplayerGamesListController {
 
     @FXML
     public void initialize(){
-        int compt = 0;
         for(Game game : GameService.getGamesList()){
 
             Button button = new Button(game.getName());
@@ -41,7 +41,18 @@ public class MultiplayerGamesListController {
 
                 @Override
                 public void handle(Event event) {
-                    FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("MultiplayerGame.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GameConnection.fxml"));
+                    try {
+                        Parent root = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    GameConnectionController gameConnectionController = loader.getController();
+                    gameConnectionController.storeGameInstance(game);
+
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameConnection.fxml"));
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = null;
                     try {
@@ -56,8 +67,6 @@ public class MultiplayerGamesListController {
 
             });
             buttonList.add(button);
-
-            compt++;
         }
         buttonsContainer.getChildren().clear();
         buttonsContainer.getChildren().addAll(buttonList);
