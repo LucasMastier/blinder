@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="681.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blinderGUI.TrainingGameController">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blinderGUI.TrainingGameController">
    <children>
-      <Label alignment="CENTER" layoutX="354.0" layoutY="85.0" prefHeight="17.0" prefWidth="392.0" text="Qui est l'auteur ?" />
-      <TilePane fx:id="buttonsContainer" layoutX="255.0" layoutY="141.0" prefHeight="399.0" prefWidth="591.0" />
-      <Label fx:id="answerLabel" layoutX="535.0" layoutY="590.0" />
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.0" minWidth="10.0" prefWidth="220.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="883.0" minWidth="10.0" prefWidth="862.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1093.0" minWidth="10.0" prefWidth="216.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="676.0" minHeight="10.0" prefHeight="322.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="559.0" minHeight="10.0" prefHeight="293.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="188.0" minHeight="10.0" prefHeight="188.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label fx:id="answerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1001.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1079.0" text="Qui est l'auteur ?" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <TilePane fx:id="buttonsContainer" prefHeight="293.0" prefWidth="648.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
    </children>
-</AnchorPane>
+</VBox>

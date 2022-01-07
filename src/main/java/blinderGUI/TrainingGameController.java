@@ -47,6 +47,7 @@ public class TrainingGameController {
                     if(PlaylistService.checkAuthor(button.getText())){
                         answerLabel.setText("Bonne réponse !");
 
+
                         try {
                             TimeUnit.SECONDS.sleep(3);
                         } catch (InterruptedException e) {
