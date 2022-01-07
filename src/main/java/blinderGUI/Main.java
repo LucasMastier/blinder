@@ -1,15 +1,25 @@
 package blinderGUI;
 
+import blinderBackEnd.Server.Client;
+import blinderBackEnd.Server.Server;
 import blinderBackEnd.model.*;
 import javafx.application.Application;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 public class Main extends Application {
     @Override
@@ -33,7 +43,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Song vvs = new Song("Ninho","VVS", "src/main/resources/mp3files/VVS.mp3");
         Song tr = new Song("Leto","Tout recommencer", "src/main/resources/mp3files/Tout_recommencer.mp3");
@@ -52,6 +62,47 @@ public class Main extends Application {
         Game game = new Game(rap, "Partie 1");
         GameService.addGameToList(game);
 
+        //Lancement du client
+
+
+
+        Service<Void> backgroundThread = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+
+                        try {
+                            Client.clientConnection();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        return null;
+                    }
+                };
+            }
+        };
+
+        backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                System.out.println("CA MARCHE");
+            }
+        });
+
+        backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                System.out.println("ca marche pas sa mere");
+            }
+        });
+
+        backgroundThread.restart();
+
         launch();
+
+
     }
 }

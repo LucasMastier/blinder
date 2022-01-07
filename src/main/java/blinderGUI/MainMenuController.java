@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import static blinderGUI.Main.switchTo;
