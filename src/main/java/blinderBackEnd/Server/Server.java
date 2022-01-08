@@ -28,8 +28,23 @@ public class Server {
 
             pool.execute(clientThread);
         }
-
-
-
+    }
+    public synchronized void onConnectionReady(ClientHandler conn){
+        clients.add(conn);
+        sendToAllConnections("Client connect: "+conn);
+    }
+    public synchronized void onReceiveString(ClientHandler conn, String val){
+        sendToAllConnections(val);
+    }
+    public synchronized void onDisconnect(ClientHandler conn){
+        clients.remove(conn);
+        sendToAllConnections("Client disconect: "+conn);
+    }
+    private void sendToAllConnections(String mess){
+        System.out.println(mess);
+        final int length=clients.size();
+        for(int i=0;i<length;i++){
+            clients.get(i).sendMessage(mess);
+        }
     }
 }

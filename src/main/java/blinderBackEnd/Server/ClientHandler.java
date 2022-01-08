@@ -37,4 +37,8 @@ public class ClientHandler implements Runnable {
             }
         }
     }
+    public synchronized void sendMessage(String val){
+        out.write(val+"\r\n");
+        out.flush();
+    }
 }
