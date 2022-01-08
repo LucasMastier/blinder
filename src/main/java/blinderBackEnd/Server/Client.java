@@ -1,30 +1,37 @@
 package blinderBackEnd.Server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import blinderBackEnd.model.PlaylistService;
+
+import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client {
+
+    public Client(){}
+
     public static void clientConnection() throws IOException {
         Socket socket = new Socket("localhost", Server.PORT);
 
         BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+
 
         while(true) {
             System.out.println("> ");
-            String command = keyboard.readLine();
+            Scanner scanner = new Scanner(System.in);
+            String command = scanner.nextLine();
 
-            //if(command.equals("quit")) break;
-
-            out.println(command);
+            out.write(command);
 
             String serverResponse = input.readLine();
             System.out.println("Server : " + serverResponse);
         }
+    }
+
+    public static void sendMessageToServer(String message){
+
     }
 
 
@@ -45,7 +52,11 @@ public class Client {
             out.println(command);
 
             String serverResponse = input.readLine();
-            System.out.println("Server : " + serverResponse);
+            switch(serverResponse){
+                case "lance cette fonction":
+                    System.out.println("reponse reçue du serveur");
+            }
+            //System.out.println("Server : " + serverResponse);
         }
     }
 }

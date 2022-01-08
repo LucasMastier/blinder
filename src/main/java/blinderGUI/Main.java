@@ -12,14 +12,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Main extends Application {
     @Override
@@ -29,6 +28,51 @@ public class Main extends Application {
         stage.setTitle("Blinder");
         stage.setScene(scene);
         stage.show();
+
+
+
+        Service<Void> backgroundThread = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+
+                        Socket socket = new Socket("localhost", Server.PORT);
+                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+
+                        MainMenuController mainMenuController = fxmlLoader.getController();
+                        mainMenuController.storeSocket(socket, in, out);
+
+
+                        return null;
+                    }
+                };
+            }
+        };
+
+        backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                System.out.println("CA MARCHE");
+            }
+        });
+
+        backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                System.out.println("ca marche pas sa mere");
+            }
+        });
+
+        backgroundThread.restart();
+
+
+
+
+
+
     }
 
     @FXML
@@ -66,40 +110,7 @@ public class Main extends Application {
 
 
 
-        Service<Void> backgroundThread = new Service<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
 
-                        try {
-                            Client.clientConnection();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        return null;
-                    }
-                };
-            }
-        };
-
-        backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("CA MARCHE");
-            }
-        });
-
-        backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("ca marche pas sa mere");
-            }
-        });
-
-        backgroundThread.restart();
 
         launch();
 

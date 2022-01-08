@@ -40,9 +40,6 @@ public class PlaylistService {
             //System.out.println(i);
         }
         Collections.shuffle(randomValues);
-        for (int i = 0; i < playlistSize; i++) {
-            System.out.println(randomValues.get(i));
-        }
 
     }
 
