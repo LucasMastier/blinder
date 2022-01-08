@@ -1,5 +1,7 @@
 package blinderBackEnd.Server;
 
+import blinderBackEnd.model.Game;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,14 +14,18 @@ public class ClientHandler implements Runnable {
     private BufferedReader in;
     private PrintWriter out;
 
-    private ArrayList<ClientHandler> clients;
+    private ArrayList<ClientHandler> clients = new ArrayList<>();
+    private ArrayList<Game> games = new ArrayList<>();
 
-    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients) throws IOException {
+    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients, ArrayList<Game> games) throws IOException {
         this.client = clientSocket;
         this.clients = clients;
+        this.games = games;
         in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         out = new PrintWriter(client.getOutputStream(),true);
     }
+
+
 
     @Override
     public void run() {
@@ -32,6 +38,8 @@ public class ClientHandler implements Runnable {
                     case "TEST":
                         out.println("Menu");
                         break;
+                    case "Send":
+                        outToAll("SALUT LES FDP DE CLIENTS");
                 }
 
             }
@@ -47,6 +55,14 @@ public class ClientHandler implements Runnable {
             }
         }
     }
+
+    private void outToAll(String string) {
+        for(ClientHandler client : clients){
+            client.out.println(string);
+        }
+    }
+
+
     public synchronized void sendMessage(String val){
         out.write(val+"\r\n");
         out.flush();

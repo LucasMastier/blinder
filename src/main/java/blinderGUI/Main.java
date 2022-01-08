@@ -76,7 +76,7 @@ public class Main extends Application {
     }
 
     @FXML
-    public static void switchTo(ActionEvent event, String page) throws IOException {
+    public static FXMLLoader switchTo(ActionEvent event, String page) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(page));
 
         //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
@@ -85,6 +85,7 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.show();
+        return fxmlLoader;
     }
 
     public static void main(String[] args) throws IOException {

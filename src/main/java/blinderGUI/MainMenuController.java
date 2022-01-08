@@ -1,9 +1,13 @@
 package blinderGUI;
 
+import blinderBackEnd.Server.Server;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -41,12 +45,36 @@ public class MainMenuController {
         stage.setScene(scene);
         stage.show();
 
-        out.println("TEST");
-        String serverResponse = in.readLine();
-        switch(serverResponse){
-            case "Menu":
-                System.out.println("Ok menu");
-        }
+
+
+        out.println("Send");
+
+        Service<Void> backgroundThread = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+
+                        while(true) {
+                            String serverResponse = in.readLine();
+                            switch (serverResponse) {
+                                case "Menu":
+                                    System.out.println("Ok menu");
+                                case "SALUT LES FDP DE CLIENTS":
+                                    System.out.println("SALUT LES FDP DE CLIENTS");
+
+                            }
+                        }
+
+                    }
+                };
+            }
+        };
+
+        backgroundThread.restart();
+
+
 
 
     }
@@ -54,7 +82,10 @@ public class MainMenuController {
     @FXML
     public void switchToMultiplayerMode(ActionEvent event) throws IOException {
         System.out.printf("TEST");
-        switchTo(event, "MultiplayerGamesList.fxml");
+        FXMLLoader loader = switchTo(event, "MultiplayerGamesList.fxml");
+
+        MultiplayerGamesListController MultiplayerGamesListController = loader.getController();
+        MultiplayerGamesListController.storeSocket(socket, in, out);
     }
 
 }

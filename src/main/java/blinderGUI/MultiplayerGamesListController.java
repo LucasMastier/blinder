@@ -16,7 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +28,17 @@ import static blinderBackEnd.model.PlaylistService.getRandomAuthorFromPlaylist;
 import static blinderGUI.Main.switchTo;
 
 public class MultiplayerGamesListController {
+    //Socket
+    private Socket socket;
+
+    private BufferedReader in;
+    private PrintWriter out;
+
+    public void storeSocket(Socket socket, BufferedReader in, PrintWriter out) throws IOException {
+        this.socket = socket;
+        this.in = in;
+        this.out = out;
+    }
 
     @FXML
     private TilePane buttonsContainer;

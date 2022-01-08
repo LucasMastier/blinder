@@ -1,5 +1,8 @@
 package blinderBackEnd.Server;
 
+import blinderBackEnd.model.Game;
+import blinderBackEnd.model.GameService;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,6 +17,7 @@ public class Server {
     public static int PORT = 1236;
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(4);
+    private static ArrayList<Game> games = GameService.getGamesList();
 
     public static void main(String[] args) throws IOException {
 
@@ -23,12 +27,12 @@ public class Server {
             System.out.println("[Server] Waiting client connection");
             Socket client = listener.accept();
             System.out.println("[Server] Connected to client!");
-            ClientHandler clientThread = new ClientHandler(client, clients);
+            ClientHandler clientThread = new ClientHandler(client, clients, games);
             clients.add(clientThread);
-
             pool.execute(clientThread);
         }
     }
+
     public synchronized void onConnectionReady(ClientHandler conn){
         clients.add(conn);
         sendToAllConnections("Client connect: "+conn);

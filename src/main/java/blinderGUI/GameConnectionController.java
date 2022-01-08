@@ -40,14 +40,18 @@ public class GameConnectionController {
         currentGame = game;
     }
 
+
+
     @FXML
     public void confirmUsername(ActionEvent event){
         if(!isConnected){
+            /*
             Player player = new Player(usernameInput.getText());
             PlayerService.addPlayerToPlayersList(player);
             currentGame.addPlayer(player);
             currentPlayer = player;
-            playersContainer.getChildren().add(new Label(player.getUsername()));
+            playersContainer.getChildren().add(new Label(player.getUsername()));*/
+
             isConnected = true;
         } else {
             warning.setText("Vous êtes déjà connecté en tant que "+currentPlayer.getUsername()+" !");
