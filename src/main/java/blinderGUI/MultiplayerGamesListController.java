@@ -2,7 +2,6 @@ package blinderGUI;
 
 import blinderBackEnd.model.Game;
 import blinderBackEnd.model.GameService;
-import blinderBackEnd.model.PlaylistService;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -16,15 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import static blinderBackEnd.model.PlaylistService.getRandomAuthorFromPlaylist;
 import static blinderGUI.Main.switchTo;
 
 public class MultiplayerGamesListController {
@@ -66,6 +61,12 @@ public class MultiplayerGamesListController {
 
                     GameConnectionController gameConnectionController = loader.getController();
                     gameConnectionController.storeGameInstance(game);
+
+                    try {
+                        gameConnectionController.storeSocket(socket, in, out);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
 
                     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameConnection.fxml"));

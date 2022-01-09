@@ -7,28 +7,14 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
+    //public static Socket socket;
 
-    public Client(){}
+    //public Client(){}
 
-    public static void clientConnection() throws IOException {
-        Socket socket = new Socket("localhost", Server.PORT);
+    /*public static void clientConnection() throws IOException {
+        Client.socket = new Socket("localhost", Server.PORT);
 
-        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-
-
-        while(true) {
-            System.out.println("> ");
-            Scanner scanner = new Scanner(System.in);
-            String command = scanner.nextLine();
-
-            out.write(command);
-
-            String serverResponse = input.readLine();
-            System.out.println("Server : " + serverResponse);
-        }
-    }
+    }*/
 
     public static void sendMessageToServer(String message){
 
