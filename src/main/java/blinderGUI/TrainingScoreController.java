@@ -1,5 +1,6 @@
 package blinderGUI;
 
+import blinderBackEnd.model.GameService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ public class TrainingScoreController {
     private Button mainMenuButton;
 
     public void initialize(){
-        scoreDisplay.setText("phrase a inserer");
+        scoreDisplay.setText("Votre score : "+GameService.getScore_cpt());
     }
 
     public void switchToMainMenu(ActionEvent event) throws IOException {
@@ -28,7 +29,7 @@ public class TrainingScoreController {
     }
 
     public void replayTrainingMode(ActionEvent event) throws IOException {
-        //Reset le compteur de score
+        GameService.setScore_cpt(0);
         switchTo(event, "TrainingGame.fxml");
     }
 
