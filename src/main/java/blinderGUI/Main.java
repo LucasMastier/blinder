@@ -63,12 +63,16 @@ public class Main extends Application {
         Song tr = new Song("Leto","Tout recommencer", "src/main/resources/mp3files/Tout_recommencer.mp3");
         Song fr = new Song("Freeze Corleone","Freeze raël", "src/main/resources/mp3files/Freeze_Rael.mp3");
         Song hs = new Song("Hamza","HS", "src/main/resources/mp3files/HS.mp3");
+        Song em = new Song("Eminem","Real Slim Shady","src/main/mp3files/eminem.mp3");
+        Song dk = new Song("Drake","God's Plan","src/main/mp3files/drake.mp3");
 
         Playlist rap = new Playlist("Rap");
         rap.addToPlaylist(vvs);
         rap.addToPlaylist(tr);
         rap.addToPlaylist(fr);
         rap.addToPlaylist(hs);
+        rap.addToPlaylist(em);
+        rap.addToPlaylist(dk);
 
         PlaylistService.setCurrentPlaylist(rap);
         PlaylistService.addToPlaylists(rap);
