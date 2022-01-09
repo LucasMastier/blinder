@@ -1,11 +1,13 @@
 package blinderGUI;
 
+import blinderBackEnd.Server.Server;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -79,9 +81,11 @@ public class MainMenuController {
 
     @FXML
     public void switchToMultiplayerMode(ActionEvent event) throws IOException {
+        System.out.printf("TEST");
         FXMLLoader loader = switchTo(event, "MultiplayerGamesList.fxml");
-        //MultiplayerGamesListController multiplayerGamesListController = loader.getController();
-        //multiplayerGamesListController.storeSocket(socket, in, out);
+
+        MultiplayerGamesListController MultiplayerGamesListController = loader.getController();
+        MultiplayerGamesListController.storeSocket(socket, in, out);
     }
 
 }

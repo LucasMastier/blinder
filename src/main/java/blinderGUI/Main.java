@@ -39,19 +39,11 @@ public class Main extends Application {
                     protected Void call() throws Exception {
 
                         Socket socket = new Socket("localhost", Server.PORT);
+                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 
-
-                        //BufferedReader in = new BufferedReader(new InputStreamReader(Client.socket.getInputStream()));
-                        //PrintWriter out = new PrintWriter(Client.socket.getOutputStream(),true);
-
-
-                        System.out.println(socket);
-
-
-
-                        //MainMenuController mainMenuController = fxmlLoader.getController();
-                        //mainMenuController.storeSocket(Client.socket, in, out);
-
+                        MainMenuController mainMenuController = fxmlLoader.getController();
+                        mainMenuController.storeSocket(socket, in, out);
 
 
                         return null;

@@ -1,25 +1,15 @@
 package blinderGUI;
 
-import blinderBackEnd.Server.Client;
 import blinderBackEnd.model.Game;
 import blinderBackEnd.model.Player;
 import blinderBackEnd.model.PlayerService;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
+import blinderBackEnd.model.Playlist;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
-
-import java.io.*;
-import java.net.Socket;
-
-import static blinderGUI.Main.switchTo;
 
 public class GameConnectionController {
 
@@ -38,89 +28,29 @@ public class GameConnectionController {
     @FXML
     private boolean isConnected = false;
 
-    private boolean allPlayersAreConnected = false;
+
 
     private static Player currentPlayer;
 
     @FXML
-    private Button launchGameButton;
-
-    @FXML
     private Label warning;
-
-    //Socket
-    private Socket socket;
-
-    private BufferedReader in;
-    private PrintWriter out;
-
-    public void storeSocket(Socket socket, BufferedReader in, PrintWriter out) throws IOException {
-        this.socket = socket;
-        this.in = in;
-        this.out = out;
-    }
-
 
     @FXML
     public void storeGameInstance(Game game){
         currentGame = game;
     }
 
-    @FXML
-    public void initialize(){
-        //System.out.println(currentObjectOutputStream);
-        Service<Void> backgroundThread = new Service<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-
-                        while(true){
-                            if(allPlayersAreConnected){
-                                launchGameButton.setVisible(true);
-                                break;
-                            }
-                        }
-
-
-                        return null;
-                    }
-                };
-            }
-        };
-
-        backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("CA MARCHE");
-            }
-        });
-
-        backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("ca marche pas sa mere");
-            }
-        });
-
-        backgroundThread.restart();
-    }
-
 
 
     @FXML
-    public void confirmUsername(ActionEvent event) throws IOException {
+    public void confirmUsername(ActionEvent event){
         if(!isConnected){
-            PrintWriter out1 = new PrintWriter(socket.getOutputStream());
-            out1.write("AddPlayerToGame "+currentGame.getName()+" "+usernameInput.getText());
-
+            /*
             Player player = new Player(usernameInput.getText());
-
             PlayerService.addPlayerToPlayersList(player);
             currentGame.addPlayer(player);
             currentPlayer = player;
-            playersContainer.getChildren().add(new Label(usernameInput.getText()));
+            playersContainer.getChildren().add(new Label(player.getUsername()));*/
 
             isConnected = true;
         } else {
@@ -129,13 +59,6 @@ public class GameConnectionController {
 
     }
 
-    public void switchToMultiplayerGame(ActionEvent event) throws IOException {
-        FXMLLoader loader = switchTo(event, "MultiplayerGame.fxml");
-
-        MultiplayerGameController multiplayerGameController = loader.getController();
-        multiplayerGameController.storeSocket(socket, in, out);
-
-    }
 
 
 }

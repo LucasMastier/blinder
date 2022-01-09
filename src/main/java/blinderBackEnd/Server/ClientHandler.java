@@ -1,9 +1,11 @@
 package blinderBackEnd.Server;
 
 import blinderBackEnd.model.Game;
-import blinderBackEnd.model.Player;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -11,11 +13,9 @@ public class ClientHandler implements Runnable {
     private Socket client;
     private BufferedReader in;
     private PrintWriter out;
-    private InputStream inputStream;
-    private ObjectInputStream objectInputStream;
 
     private ArrayList<ClientHandler> clients = new ArrayList<>();
-    private ArrayList<Game> games;
+    private ArrayList<Game> games = new ArrayList<>();
 
     public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients, ArrayList<Game> games) throws IOException {
         this.client = clientSocket;
@@ -23,8 +23,6 @@ public class ClientHandler implements Runnable {
         this.games = games;
         in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         out = new PrintWriter(client.getOutputStream(),true);
-        inputStream = clientSocket.getInputStream();
-        objectInputStream = new ObjectInputStream(inputStream);
     }
 
 
@@ -34,28 +32,14 @@ public class ClientHandler implements Runnable {
         try{
             while(true){
                 String line = in.readLine();
-
-                out.println(line);
-                System.out.println("Client : "+line);
-                /*switch(line){
+                //out.println(line);
+                //System.out.println("Client : "+line);
+                switch(line){
                     case "TEST":
                         out.println("Menu");
                         break;
                     case "Send":
                         outToAll("SALUT LES FDP DE CLIENTS");
-                        break;
-                }*/
-
-                String[] command = line.split(" ");
-                if(command[0].equals("AddPlayerToGame")){
-                    for(Game game : games){
-                        if(game.getName().equals(command[1])){
-                            System.out.println("Joueur "+command[2]+" bien recu");
-                            game.addPlayer(new Player(command[2]));
-                            outToAll("ClientsAddPlayerToGame "+command[1]+" "+command[2]);
-                        }
-                    }
-
                 }
 
             }
