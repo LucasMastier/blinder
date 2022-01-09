@@ -14,12 +14,10 @@ public class ClientHandler implements Runnable {
     private ObjectOutputStream out;
 
     private ArrayList<ClientHandler> clients;
-    private static ArrayList<Game> games;
 
-    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients, ArrayList<Game> games) throws IOException {
+    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients) throws IOException {
         this.client = clientSocket;
         this.clients = clients;
-        this.games = games;
         in = new ObjectInputStream(client.getInputStream());
         out = new ObjectOutputStream(client.getOutputStream());
     }
@@ -37,7 +35,7 @@ public class ClientHandler implements Runnable {
                 switch(request.getMessage()){
                     case"AddPlayerToGame":
                         System.out.println("Received player "+request.getPlayer().getUsername()+" from client");
-                        for(Game serverGame : games){
+                        for(Game serverGame : Server.getGames()){
                             System.out.println(serverGame.getName());
                             if(serverGame.getName().equals(request.getGame().getName())){
                                 serverGame.addPlayer(request.getPlayer());
@@ -53,7 +51,7 @@ public class ClientHandler implements Runnable {
                         break;
 
                     case "UpdatePlayersList":
-                        for(Game serverGame : games){
+                        for(Game serverGame : Server.getGames()){
                             if(serverGame.getName().equals(request.getGame().getName())){
                                 for(Player player : serverGame.getPlayersList()){
                                     System.out.println(player.getUsername()+" is connected to "+serverGame.getName());

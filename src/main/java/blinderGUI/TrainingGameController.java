@@ -69,27 +69,29 @@ public class TrainingGameController {
                             stage.show();
                             GameService.setRound_cpt(0);
 
-                        }
-                        try {
-                            TimeUnit.SECONDS.sleep(3);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Stage stage = (Stage) button.getScene().getWindow();
-                        stage.close();
-                        PlaylistService.mediaPlayer.stop();
+                        } else {
+                            try {
+                                TimeUnit.SECONDS.sleep(3);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Stage stage = (Stage) button.getScene().getWindow();
+                            stage.close();
+                            PlaylistService.mediaPlayer.stop();
 
-                        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
-                        Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene scene = null;
-                        try {
-                            scene = new Scene(fxmlLoader.load(),800,500);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+                            Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load(),800,500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            newStage.setScene(scene);
+                            newStage.show();
                         }
 
-                        newStage.setScene(scene);
-                        newStage.show();
 
 
                     } else {
@@ -114,27 +116,29 @@ public class TrainingGameController {
                             stage.show();
                             GameService.setRound_cpt(0);
 
-                        }
-                        try {
-                            TimeUnit.SECONDS.sleep(3);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Stage stage = (Stage) button.getScene().getWindow();
-                        stage.close();
-                        PlaylistService.mediaPlayer.stop();
+                        } else {
+                            try {
+                                TimeUnit.SECONDS.sleep(3);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Stage stage = (Stage) button.getScene().getWindow();
+                            stage.close();
+                            PlaylistService.mediaPlayer.stop();
 
-                        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
-                        Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene scene = null;
-                        try {
-                            scene = new Scene(fxmlLoader.load(),800,500);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+                            Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load(),800,500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            newStage.setScene(scene);
+                            newStage.show();
                         }
 
-                        newStage.setScene(scene);
-                        newStage.show();
                     }
                 }
 
