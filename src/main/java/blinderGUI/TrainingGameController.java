@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static blinderBackEnd.model.PlaylistService.getRandomAuthorFromPlaylist;
+import static blinderGUI.Main.switchTo;
 
 public class TrainingGameController {
 
@@ -48,11 +49,26 @@ public class TrainingGameController {
                         answerLabel.setText("Bonne réponse !");
                         GameService.setScore_cpt(GameService.getScore_cpt()+1);
                         GameService.setRound_cpt(GameService.getRound_cpt()+1);
+
+
                         if(GameService.getRound_cpt()==5){
-                            //GameService.setRound_cpt(0); dans le switch
+                            PlaylistService.mediaPlayer.stop();
                             //switchTo tableau des scores
-                            //print score
-                            //ajout btn "retry" ?
+                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingScore.fxml"));
+
+                            //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load(),800,500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            stage.setScene(scene);
+                            stage.show();
+                            GameService.setRound_cpt(0);
+
                         }
                         try {
                             TimeUnit.SECONDS.sleep(3);
@@ -81,9 +97,23 @@ public class TrainingGameController {
                         GameService.setRound_cpt(GameService.getRound_cpt()+1);
 
                         if(GameService.getRound_cpt()==5){
-                            //GameService.setRound_cpt(0); dans le switch
+                            PlaylistService.mediaPlayer.stop();
                             //switchTo tableau des scores
-                            //print score
+                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingScore.fxml"));
+
+                            //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load(),800,500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            stage.setScene(scene);
+                            stage.show();
+                            GameService.setRound_cpt(0);
+
                         }
                         try {
                             TimeUnit.SECONDS.sleep(3);
