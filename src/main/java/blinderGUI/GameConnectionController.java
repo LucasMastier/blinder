@@ -1,9 +1,7 @@
 package blinderGUI;
 
 import blinderBackEnd.Server.Client;
-import blinderBackEnd.model.Game;
-import blinderBackEnd.model.Player;
-import blinderBackEnd.model.PlayerService;
+import blinderBackEnd.model.*;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -18,6 +16,8 @@ import javafx.scene.layout.TilePane;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static blinderGUI.Main.switchTo;
 
@@ -51,20 +51,17 @@ public class GameConnectionController {
     //Socket
     private Socket socket;
 
-    private BufferedReader in;
-    private PrintWriter out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
-    public void storeSocket(Socket socket, BufferedReader in, PrintWriter out) throws IOException {
+    public void storeSocketAndGame(Socket socket, ObjectInputStream in, ObjectOutputStream out, Game game)throws IOException {
         this.socket = socket;
         this.in = in;
         this.out = out;
-    }
-
-
-    @FXML
-    public void storeGameInstance(Game game){
         currentGame = game;
     }
+
+
 
     @FXML
     public void initialize(){
@@ -90,21 +87,32 @@ public class GameConnectionController {
             }
         };
 
-        backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("CA MARCHE");
-            }
-        });
-
-        backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("ca marche pas sa mere");
-            }
-        });
-
         backgroundThread.restart();
+
+        Service<Void> backgroundThreadUpdatePlayersList = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        System.out.println("A lecoute du serveur");
+                        while(true){
+                            System.out.println("avant in");
+                            ArrayList<Player> updatedPlayersList = (ArrayList<Player>) in.readObject();
+                            System.out.println("apres in");
+                            System.out.println("Received updated players list "+updatedPlayersList+" from server");
+                            if(updatedPlayersList.size()!=currentGame.getPlayersList().size()){
+                                currentGame.setPlayersList(updatedPlayersList);
+                                updateConnectedPlayers();
+                            }
+                        }
+
+                    }
+                };
+            }
+        };
+
+        backgroundThreadUpdatePlayersList.restart();
     }
 
 
@@ -115,12 +123,20 @@ public class GameConnectionController {
 
             //out.write("AddPlayerToGame "+currentGame.getName()+" "+usernameInput.getText());
 
-            Player player = new Player(usernameInput.getText());
+            System.out.println(socket);
+
+            Player player = new Player(usernameInput.getText(), currentGame);
+
+            Request request = new Request("AddPlayerToGame", player, currentGame);
+
+            out.writeObject(request);
+
 
             PlayerService.addPlayerToPlayersList(player);
-            currentGame.addPlayer(player);
             currentPlayer = player;
-            playersContainer.getChildren().add(new Label(usernameInput.getText()));
+
+            updateConnectedPlayers();
+
 
             isConnected = true;
         } else {
@@ -132,9 +148,16 @@ public class GameConnectionController {
     public void switchToMultiplayerGame(ActionEvent event) throws IOException {
         FXMLLoader loader = switchTo(event, "MultiplayerGame.fxml");
 
-        MultiplayerGameController multiplayerGameController = loader.getController();
-        multiplayerGameController.storeSocket(socket, in, out);
+        //MultiplayerGameController multiplayerGameController = loader.getController();
+        //multiplayerGameController.storeSocket(socket, in, out);
 
+    }
+
+    public void updateConnectedPlayers(){
+        playersContainer.getChildren().clear();
+        for(Player player : currentGame.getPlayersList()){
+            playersContainer.getChildren().add(new Label(player.getUsername()));
+        }
     }
 
 

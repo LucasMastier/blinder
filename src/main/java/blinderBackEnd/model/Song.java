@@ -1,6 +1,8 @@
 package blinderBackEnd.model;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Serializable {
     String auteur;
     String titre;
     String pathToFile;

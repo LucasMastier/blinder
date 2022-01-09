@@ -35,8 +35,8 @@ public class GameCreationController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GameConnectionController gameConnectionController = loader.getController();
-        gameConnectionController.storeGameInstance(game);
+        //GameConnectionController gameConnectionController = loader.getController();
+        //gameConnectionController.storeGameInstance(game);
 
         switchTo(event,"GameConnectionController");
     }

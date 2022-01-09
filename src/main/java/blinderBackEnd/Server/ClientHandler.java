@@ -2,6 +2,7 @@ package blinderBackEnd.Server;
 
 import blinderBackEnd.model.Game;
 import blinderBackEnd.model.Player;
+import blinderBackEnd.model.Request;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,8 +13,8 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
-    private ArrayList<ClientHandler> clients = new ArrayList<>();
-    private ArrayList<Game> games = new ArrayList<>();
+    private ArrayList<ClientHandler> clients;
+    private ArrayList<Game> games;
 
     public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients, ArrayList<Game> games) throws IOException {
         this.client = clientSocket;
@@ -31,17 +32,27 @@ public class ClientHandler implements Runnable {
             while(true){
                 //String line = in.readLine();
                 //System.out.println("Client : "+line);
-                Player player = (Player) in.readObject();
-                System.out.println("Received player "+player.getUsername()+" from client");
-                //out.println(line);
-                /*
-                switch(line){
-                    case "TEST":
-                        out.println("Menu");
+                Request request = (Request) in.readObject();
+
+                switch(request.getMessage()){
+                    case"AddPlayerToGame":
+                        System.out.println("Received player "+request.getPlayer().getUsername()+" from client");
+                        for(Game serverGame : games){
+                            System.out.println(serverGame.getName());
+                            if(serverGame.getName().equals(request.getGame().getName())){
+                                serverGame.addPlayer(request.getPlayer());
+                                System.out.println("Une partie correspond");
+                            }
+                        }
+                        updateAllGamePlayersList(request.getGame());
+
                         break;
-                    case "Send":
-                        outToAll("hey");
-                }*/
+
+                    case"test":
+                        System.out.println("test reussi");
+                        break;
+                }
+
 
 
             }
@@ -61,6 +72,12 @@ public class ClientHandler implements Runnable {
     private void outToAll(String string) {
         for(ClientHandler client : clients){
             //client.out.println(string);
+        }
+    }
+
+    private void updateAllGamePlayersList(Game game) throws IOException {
+        for(ClientHandler client : clients){
+            out.writeObject(game.getPlayersList());
         }
     }
 

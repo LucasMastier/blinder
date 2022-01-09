@@ -1,7 +1,10 @@
 package blinderGUI;
 
 import blinderBackEnd.Server.Server;
+import blinderBackEnd.model.Game;
 import blinderBackEnd.model.Player;
+import blinderBackEnd.model.Playlist;
+import blinderBackEnd.model.Request;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -58,10 +61,6 @@ public class MainMenuController {
 
         System.out.println(socket);
 
-        Player player = new Player("Saren");
-
-        out.writeObject(player);
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),800,500);
 
@@ -70,7 +69,7 @@ public class MainMenuController {
         stage.show();
 
         MultiplayerGamesListController multiplayerGamesListController = fxmlLoader.getController();
-        //multiplayerGamesListController.storeSocket(socket, in, out);
+        multiplayerGamesListController.storeSocket(socket, in, out);
 
 
     }
@@ -80,6 +79,11 @@ public class MainMenuController {
         FXMLLoader fxmlLoader = switchTo(event, "SpotifyTrainingMode.fxml");
 
 
+    }
+
+
+    public Socket getSocket(){
+        return socket;
     }
 
 

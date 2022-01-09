@@ -1,8 +1,6 @@
 package blinderGUI;
 
-import blinderBackEnd.model.Game;
-import blinderBackEnd.model.GameService;
-import blinderBackEnd.model.PlaylistService;
+import blinderBackEnd.model.*;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -16,9 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +27,10 @@ public class MultiplayerGamesListController {
     //Socket
     private Socket socket;
 
-    private BufferedReader in;
-    private PrintWriter out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
-    public void storeSocket(Socket socket, BufferedReader in, PrintWriter out) throws IOException {
+    public void storeSocket(Socket socket, ObjectInputStream in, ObjectOutputStream out) throws IOException {
         this.socket = socket;
         this.in = in;
         this.out = out;
@@ -57,16 +53,6 @@ public class MultiplayerGamesListController {
 
                 @Override
                 public void handle(Event event) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GameConnection.fxml"));
-                    try {
-                        Parent root = loader.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    GameConnectionController gameConnectionController = loader.getController();
-                    gameConnectionController.storeGameInstance(game);
-
 
 
                     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameConnection.fxml"));
@@ -81,11 +67,14 @@ public class MultiplayerGamesListController {
 
                     stage.setScene(scene);
                     stage.show();
+
+                    GameConnectionController gameConnectionController = fxmlLoader.getController();
                     try {
-                        gameConnectionController.storeSocket(socket, in, out);
+                        gameConnectionController.storeSocketAndGame(socket, in, out, game);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
 
             });

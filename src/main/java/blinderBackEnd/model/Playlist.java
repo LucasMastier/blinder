@@ -1,9 +1,10 @@
 package blinderBackEnd.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Playlist {
+public class Playlist implements Serializable {
     String titre;
     List<Song> playlist = new ArrayList<>();
 
@@ -13,6 +14,8 @@ public class Playlist {
         this.playlist = playlist;
     }
 
+
+
     public void addPlaylistToPlaylists(){
         PlaylistService.addToPlaylists(this);
     }
@@ -20,6 +23,7 @@ public class Playlist {
     public Playlist(String titre){
         this.titre = titre;
     }
+
     public String getTitre() {
         return titre;
     }

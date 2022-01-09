@@ -1,7 +1,8 @@
 package blinderBackEnd.model;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game {
+public class Game implements Serializable {
     private ArrayList<Player> list_player;
     private Playlist pl;
     private String name;
@@ -10,6 +11,10 @@ public class Game {
         list_player= new ArrayList<Player>();
         pl = playlist;
         this.name = name;
+    }
+
+    public ArrayList<Player> getPlayersList(){
+        return list_player;
     }
 
     public void addPlayer(Player j){
@@ -32,6 +37,10 @@ public class Game {
                 p.setScore(p.getScore()+1);
             }
         }
+    }
+
+    public void setPlayersList(ArrayList<Player> playersList){
+        list_player = playersList;
     }
 
     public String getName(){
