@@ -162,35 +162,24 @@ public class GameConnectionController {
 
     @FXML
     public void updateConnectedPlayersOnClick(ActionEvent event) throws IOException, ClassNotFoundException {
-
-
             Request request = new Request("UpdatePlayersList", currentGame);
-
             out.writeObject(request);
             ArrayList<Player> updatedPlayersList = (ArrayList<Player>) in.readObject();
 
 
+
             currentGame.setPlayersList(updatedPlayersList);
-            for(Player players : updatedPlayersList){
+            for(Player players : currentGame.getPlayersList()){
                 System.out.println(players.getUsername()+" est connecté a la partie");
             }
-
-                    /*
-                    playersContainer.getChildren().clear();
-                    for (Player player : updatedPlayersList) {
-                        System.out.println(player.getUsername() + " est présent");
-                        playersContainer.getChildren().add(new Label(player.getUsername()));
-                    }*/
+            /*
+            playersContainer.getChildren().clear();
+            for (Player player : updatedPlayersList) {
+                System.out.println(player.getUsername() + " est présent");
+                playersContainer.getChildren().add(new Label(player.getUsername()));
+            }*/
 
             System.out.println("Fin du thread");
-
-
-
-
-
-
-
-
     }
 
 

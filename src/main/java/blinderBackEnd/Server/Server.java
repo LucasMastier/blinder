@@ -18,6 +18,10 @@ public class Server {
     private static ExecutorService pool = Executors.newFixedThreadPool(100);
     private static ArrayList<Game> games = GameService.getGamesList();
 
+    public static ArrayList<Game> getGames(){
+        return games;
+    }
+
     public static void main(String[] args) throws IOException {
 
         ServerSocket listener = new ServerSocket(PORT);
@@ -51,6 +55,8 @@ public class Server {
 
         Game game = new Game(rap, "Partie 1");
         GameService.addGameToList(game);
+
+
 
         while(true){
             System.out.println("[Server] Waiting client connection");

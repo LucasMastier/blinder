@@ -14,7 +14,7 @@ public class ClientHandler implements Runnable {
     private ObjectOutputStream out;
 
     private ArrayList<ClientHandler> clients;
-    private ArrayList<Game> games;
+    private static ArrayList<Game> games;
 
     public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients, ArrayList<Game> games) throws IOException {
         this.client = clientSocket;
@@ -59,9 +59,9 @@ public class ClientHandler implements Runnable {
                                     System.out.println(player.getUsername()+" is connected to "+serverGame.getName());
                                 }
                                 out.writeObject(serverGame.getPlayersList());
-                                break;
                             }
                         }
+                        break;
 
                 }
 
