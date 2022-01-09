@@ -33,6 +33,7 @@
             <TilePane fx:id="playersContainer" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Joueurs présents :" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="warning" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onAction="#updateConnectedPlayersOnClick" text="Rafraichir la liste" GridPane.columnIndex="2" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

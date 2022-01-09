@@ -51,6 +51,18 @@ public class ClientHandler implements Runnable {
                     case"test":
                         System.out.println("test reussi");
                         break;
+
+                    case "UpdatePlayersList":
+                        for(Game serverGame : games){
+                            if(serverGame.getName().equals(request.getGame().getName())){
+                                for(Player player : serverGame.getPlayersList()){
+                                    System.out.println(player.getUsername()+" is connected to "+serverGame.getName());
+                                }
+                                out.writeObject(serverGame.getPlayersList());
+                                break;
+                            }
+                        }
+
                 }
 
 

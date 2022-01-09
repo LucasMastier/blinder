@@ -2,6 +2,7 @@ package blinderGUI;
 
 import blinderBackEnd.Server.Client;
 import blinderBackEnd.model.*;
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -89,7 +90,7 @@ public class GameConnectionController {
         };
 
         backgroundThread.restart();
-
+        /*
         Service<Void> backgroundThreadUpdatePlayersList = new Service<Void>() {
             @Override
             protected Task<Void> createTask() {
@@ -113,7 +114,7 @@ public class GameConnectionController {
             }
         };
 
-        backgroundThreadUpdatePlayersList.restart();
+        backgroundThreadUpdatePlayersList.restart();*/
     }
 
 
@@ -151,11 +152,51 @@ public class GameConnectionController {
 
     }
 
+
     public void updateConnectedPlayers(){
         playersContainer.getChildren().clear();
         for(Player player : currentGame.getPlayersList()){
             playersContainer.getChildren().add(new Label(player.getUsername()));
         }
+    }
+
+    @FXML
+    public void updateConnectedPlayersOnClick(ActionEvent event) throws IOException, ClassNotFoundException {
+
+        new Thread(() -> {
+            Request request = new Request("UpdatePlayersList", currentGame);
+            ArrayList<Player> updatedPlayersList = null;
+            try {
+                out.writeObject(request);
+                updatedPlayersList = (ArrayList<Player>) in.readObject();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+            currentGame.setPlayersList(updatedPlayersList);
+
+
+            Platform.runLater(new Runnable(){
+                public void run(){
+                    playersContainer.getChildren().clear();
+                    for (Player player : currentGame.getPlayersList()) {
+                        System.out.println(player.getUsername() + " est présent");
+                        playersContainer.getChildren().add(new Label(player.getUsername()));
+                    }
+                }
+            });
+
+
+        }).start();
+
+
+
+
+
+
     }
 
 
