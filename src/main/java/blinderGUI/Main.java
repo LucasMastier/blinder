@@ -123,7 +123,7 @@ public class Main extends Application {
         rap.addToPlaylist(da);
         rap.addToPlaylist(ni);
         rap.addToPlaylist(pnl);
-        
+
         PlaylistService.setCurrentPlaylist(rap);
         PlaylistService.addToPlaylists(rap);
 
