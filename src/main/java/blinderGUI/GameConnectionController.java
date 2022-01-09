@@ -65,6 +65,7 @@ public class GameConnectionController {
 
     @FXML
     public void initialize(){
+        System.out.println(socket);
         //System.out.println(currentObjectOutputStream);
         Service<Void> backgroundThread = new Service<Void>() {
             @Override
@@ -97,7 +98,7 @@ public class GameConnectionController {
                     protected Void call() throws Exception {
                         System.out.println("A lecoute du serveur");
                         while(true){
-                            System.out.println("avant in");
+                            System.out.println(in);
                             ArrayList<Player> updatedPlayersList = (ArrayList<Player>) in.readObject();
                             System.out.println("apres in");
                             System.out.println("Received updated players list "+updatedPlayersList+" from server");
@@ -124,15 +125,12 @@ public class GameConnectionController {
             //out.write("AddPlayerToGame "+currentGame.getName()+" "+usernameInput.getText());
 
             System.out.println(socket);
-
             Player player = new Player(usernameInput.getText(), currentGame);
-
             Request request = new Request("AddPlayerToGame", player, currentGame);
-
             out.writeObject(request);
 
-
             PlayerService.addPlayerToPlayersList(player);
+            currentGame.addPlayer(player);
             currentPlayer = player;
 
             updateConnectedPlayers();
