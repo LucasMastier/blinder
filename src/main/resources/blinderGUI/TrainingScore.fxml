@@ -7,12 +7,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1115.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blinderGUI.TrainingScoreController">
    <children>
       <GridPane prefHeight="734.0" prefWidth="1115.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -23,7 +22,8 @@
         </rowConstraints>
          <children>
             <Label alignment="CENTER" prefHeight="164.0" prefWidth="396.0" text="Votre score : " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button fx:id="replayButton" mnemonicParsing="false" text="Rejouer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="replayButton" mnemonicParsing="false" onAction="#replayTrainingMode" text="Rejouer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#switchToMainMenu" text="&lt; Retour au menu principal" />
          </children>
       </GridPane>
    </children>
