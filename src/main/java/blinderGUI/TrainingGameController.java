@@ -38,16 +38,23 @@ public class TrainingGameController {
         ArrayList<String> author = getRandomAuthorFromPlaylist(PlaylistService.getCurrentPlaylist());
         while(compt != 4){
 
-
             Button button = new Button(author.get(compt));
             button.setOnAction(new EventHandler() {
 
                 @Override
                 public void handle(Event event) {
+                    int round_cpt=0;
+                    int score_cpt=0;
+                    String score=score_cpt+"/5";
                     if(PlaylistService.checkAuthor(button.getText())){
                         answerLabel.setText("Bonne réponse !");
-
-
+                        score_cpt++;
+                        round_cpt++;
+                        if(round_cpt==5){
+                            //switchTo tableau des scores
+                            //print score
+                            //ajout btn "retry" ?
+                        }
                         try {
                             TimeUnit.SECONDS.sleep(3);
                         } catch (InterruptedException e) {
@@ -72,6 +79,32 @@ public class TrainingGameController {
 
                     } else {
                         answerLabel.setText("Mauvaise réponse");
+                        round_cpt++;
+
+                        if(round_cpt==5){
+                            //switchTo tableau des scores
+                            //print score
+                        }
+                        try {
+                            TimeUnit.SECONDS.sleep(3);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Stage stage = (Stage) button.getScene().getWindow();
+                        stage.close();
+                        PlaylistService.mediaPlayer.stop();
+
+                        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+                        Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene scene = null;
+                        try {
+                            scene = new Scene(fxmlLoader.load(),800,500);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        newStage.setScene(scene);
+                        newStage.show();
                     }
                 }
 
