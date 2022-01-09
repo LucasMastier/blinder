@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Playlist implements Serializable {
-    String titre;
-    List<Song> playlist = new ArrayList<>();
+    private String titre;
+    private List<Song> playlist = new ArrayList<>();
 
 
     public Playlist(String titre, List<Song> playlist){
