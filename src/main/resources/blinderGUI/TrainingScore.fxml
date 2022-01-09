@@ -21,7 +21,7 @@
           <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="201.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="164.0" prefWidth="396.0" text="Votre score : " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label fx:id="scoreDisplay" alignment="CENTER" prefHeight="164.0" prefWidth="396.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Button fx:id="replayButton" mnemonicParsing="false" onAction="#replayTrainingMode" text="Rejouer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#switchToMainMenu" text="&lt; Retour au menu principal" />
          </children>

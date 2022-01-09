@@ -20,7 +20,7 @@ public class TrainingScoreController {
     private Button mainMenuButton;
 
     public void initialize(){
-        //scoreDisplay.setText(phrase a inserer);
+        scoreDisplay.setText("phrase a inserer");
     }
 
     public void switchToMainMenu(ActionEvent event) throws IOException {
