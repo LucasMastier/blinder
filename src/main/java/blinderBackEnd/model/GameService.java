@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameService {
+    private static int round_cpt=0;
+
+    private static int score_cpt=0;
+
+    private static String score=score_cpt+"/5";
+
     private static ArrayList<Game> games = new ArrayList<>();
 
     public static void addGameToList(Game game){
@@ -14,6 +20,13 @@ public class GameService {
         return games;
     }
 
+    public static int getRound_cpt(){return round_cpt;}
 
+    public static int getScore_cpt(){return score_cpt;}
 
+    public static void setRound_cpt(int r){round_cpt=r;}
+
+    public static void setScore_cpt(int s){score_cpt=s;}
+
+    public static String getScore(){return score;}
 }
