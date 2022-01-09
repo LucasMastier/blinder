@@ -1,5 +1,6 @@
 package blinderGUI;
 
+import blinderBackEnd.model.GameService;
 import blinderBackEnd.model.Playlist;
 import blinderBackEnd.model.PlaylistService;
 import javafx.event.ActionEvent;
@@ -43,14 +44,12 @@ public class TrainingGameController {
 
                 @Override
                 public void handle(Event event) {
-                    int round_cpt=0;
-                    int score_cpt=0;
-                    String score=score_cpt+"/5";
                     if(PlaylistService.checkAuthor(button.getText())){
                         answerLabel.setText("Bonne réponse !");
-                        score_cpt++;
-                        round_cpt++;
-                        if(round_cpt==5){
+                        GameService.setScore_cpt(GameService.getScore_cpt()+1);
+                        GameService.setRound_cpt(GameService.getRound_cpt()+1);
+                        if(GameService.getRound_cpt()==5){
+                            //GameService.setRound_cpt(0); dans le switch
                             //switchTo tableau des scores
                             //print score
                             //ajout btn "retry" ?
@@ -79,9 +78,10 @@ public class TrainingGameController {
 
                     } else {
                         answerLabel.setText("Mauvaise réponse");
-                        round_cpt++;
+                        GameService.setRound_cpt(GameService.getRound_cpt()+1);
 
-                        if(round_cpt==5){
+                        if(GameService.getRound_cpt()==5){
+                            //GameService.setRound_cpt(0); dans le switch
                             //switchTo tableau des scores
                             //print score
                         }
