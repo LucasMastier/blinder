@@ -72,8 +72,8 @@ public class MainMenuController {
     }
 
     @FXML
-    public void switchToSpotifyTraningMode(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = switchTo(event, "SpotifyTrainingMode.fxml");
+    public void switchToTrainingGameImage(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = switchTo(event, "TrainingGameImage.fxml");
 
 
     }
