@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 public class Server {
     public static int PORT = 1236;
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
-    private static ExecutorService pool = Executors.newFixedThreadPool(4);
+    private static ExecutorService pool = Executors.newFixedThreadPool(100);
     private static ArrayList<Game> games = GameService.getGamesList();
 
     public static void main(String[] args) throws IOException {

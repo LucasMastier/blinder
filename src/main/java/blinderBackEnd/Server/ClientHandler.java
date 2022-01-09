@@ -44,7 +44,7 @@ public class ClientHandler implements Runnable {
                                 System.out.println("Une partie correspond");
                             }
                         }
-                        updateAllGamePlayersList(request.getGame());
+                        //updateAllGamePlayersList(request.getGame());
 
                         break;
 
@@ -87,7 +87,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    private void updateAllGamePlayersList(Game game) throws IOException {
+    /*private void updateAllGamePlayersList(Game game) throws IOException {
         System.out.println(games.get(0).getPlayersList().get(0).getUsername()+" est dans la partie");
         for(ClientHandler client : clients){
             client.out.writeObject(game.getPlayersList());
@@ -97,7 +97,7 @@ public class ClientHandler implements Runnable {
             System.out.println("Joueurs présents :");
             System.out.println(player.getUsername());
         }
-    }
+    }*/
 
     /*
     public synchronized void sendMessage(String val){
