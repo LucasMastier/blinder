@@ -1,18 +1,16 @@
 package blinderBackEnd.Server;
 
 import blinderBackEnd.model.Game;
+import blinderBackEnd.model.Player;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
     private Socket client;
-    private BufferedReader in;
-    private PrintWriter out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
     private ArrayList<ClientHandler> clients = new ArrayList<>();
     private ArrayList<Game> games = new ArrayList<>();
@@ -21,8 +19,8 @@ public class ClientHandler implements Runnable {
         this.client = clientSocket;
         this.clients = clients;
         this.games = games;
-        in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        out = new PrintWriter(client.getOutputStream(),true);
+        in = new ObjectInputStream(client.getInputStream());
+        out = new ObjectOutputStream(client.getOutputStream());
     }
 
 
@@ -31,8 +29,10 @@ public class ClientHandler implements Runnable {
     public void run() {
         try{
             while(true){
-                String line = in.readLine();
-                System.out.println("Client : "+line);
+                //String line = in.readLine();
+                //System.out.println("Client : "+line);
+                Player player = (Player) in.readObject();
+                System.out.println("Received player "+player.getUsername()+" from client");
                 //out.println(line);
                 /*
                 switch(line){
@@ -45,12 +45,12 @@ public class ClientHandler implements Runnable {
 
 
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.err.println("IO exception in client handler");
             System.err.println(e.getStackTrace());
         } finally {
-                out.close();
             try {
+                out.close();
                 in.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,13 +60,13 @@ public class ClientHandler implements Runnable {
 
     private void outToAll(String string) {
         for(ClientHandler client : clients){
-            client.out.println(string);
+            //client.out.println(string);
         }
     }
 
-
+    /*
     public synchronized void sendMessage(String val){
         out.write(val+"\r\n");
         out.flush();
-    }
+    }*/
 }

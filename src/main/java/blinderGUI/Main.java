@@ -33,11 +33,52 @@ public class Main extends Application {
 
 
         Socket socket = new Socket("localhost", Server.PORT);
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+        //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        //PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 
-        MainMenuController mainMenuController = fxmlLoader.getController();
-        mainMenuController.storeSocket(socket, in, out);
+        OutputStream outputStream = socket.getOutputStream();
+        ObjectOutputStream out = new ObjectOutputStream(outputStream);
+
+        Service<Void> backgroundThread = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+
+
+                        InputStream inputStream = socket.getInputStream();
+                        ObjectInputStream in = new ObjectInputStream(inputStream);
+
+
+
+                        MainMenuController mainMenuController = fxmlLoader.getController();
+                        mainMenuController.storeSocket(socket, in, out);
+
+
+                        return null;
+                    }
+                };
+            }
+        };
+
+        backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                System.out.println("CA MARCHE");
+            }
+        });
+
+        backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                System.out.println("ca marche pas sa mere");
+            }
+        });
+
+        backgroundThread.restart();
+
+
 
 
 
