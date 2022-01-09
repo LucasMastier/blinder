@@ -40,7 +40,6 @@ public class MainMenuController {
 
     @FXML
     public void switchToTrainingMode(ActionEvent event) throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -58,8 +57,6 @@ public class MainMenuController {
     @FXML
     public void switchToMultiplayerMode(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MultiplayerGamesList.fxml"));
-
-        System.out.println(socket);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),800,500);

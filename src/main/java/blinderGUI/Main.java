@@ -65,14 +65,14 @@ public class Main extends Application {
         backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("CA MARCHE");
+                System.out.println("Socket créé et transféré");
             }
         });
 
         backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("ca marche pas sa mere");
+                System.out.println("Erreur lors de la création du socket");
             }
         });
 

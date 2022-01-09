@@ -53,8 +53,6 @@ public class MultiplayerGamesListController {
 
                 @Override
                 public void handle(Event event) {
-
-
                     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameConnection.fxml"));
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = null;
