@@ -68,17 +68,24 @@ public class MultiplayerGamesListController {
                     gameConnectionController.storeGameInstance(game);
 
 
+
                     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameConnection.fxml"));
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = null;
                     try {
                         scene = new Scene(fxmlLoader.load(),800,500);
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
                     stage.setScene(scene);
                     stage.show();
+                    try {
+                        gameConnectionController.storeSocket(socket, in, out);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             });

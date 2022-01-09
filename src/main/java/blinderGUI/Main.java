@@ -24,51 +24,20 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainMenu.fxml"));
+
+
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         stage.setTitle("Blinder");
         stage.setScene(scene);
         stage.show();
 
 
+        Socket socket = new Socket("localhost", Server.PORT);
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 
-        Service<Void> backgroundThread = new Service<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-
-                        Socket socket = new Socket("localhost", Server.PORT);
-                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                        PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
-
-                        MainMenuController mainMenuController = fxmlLoader.getController();
-                        mainMenuController.storeSocket(socket, in, out);
-
-
-                        return null;
-                    }
-                };
-            }
-        };
-
-        backgroundThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("CA MARCHE");
-            }
-        });
-
-        backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("ca marche pas sa mere");
-            }
-        });
-
-        backgroundThread.restart();
-
-
+        MainMenuController mainMenuController = fxmlLoader.getController();
+        mainMenuController.storeSocket(socket, in, out);
 
 
 
@@ -110,10 +79,9 @@ public class Main extends Application {
         //Lancement du client
 
 
-
-
-
         launch();
+
+
 
 
     }

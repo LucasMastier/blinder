@@ -61,8 +61,7 @@ public class MainMenuController {
                             switch (serverResponse) {
                                 case "Menu":
                                     System.out.println("Ok menu");
-                                case "SALUT LES FDP DE CLIENTS":
-                                    System.out.println("SALUT LES FDP DE CLIENTS");
+                                    break;
 
                             }
                         }
@@ -81,11 +80,23 @@ public class MainMenuController {
 
     @FXML
     public void switchToMultiplayerMode(ActionEvent event) throws IOException {
-        System.out.printf("TEST");
-        FXMLLoader loader = switchTo(event, "MultiplayerGamesList.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MultiplayerGamesList.fxml"));
 
-        MultiplayerGamesListController MultiplayerGamesListController = loader.getController();
-        MultiplayerGamesListController.storeSocket(socket, in, out);
+        System.out.println(socket);
+
+        out.println("TEST");
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(),800,500);
+
+
+        stage.setScene(scene);
+        stage.show();
+
+        MultiplayerGamesListController multiplayerGamesListController = fxmlLoader.getController();
+        multiplayerGamesListController.storeSocket(socket, in, out);
+
+
     }
 
 }

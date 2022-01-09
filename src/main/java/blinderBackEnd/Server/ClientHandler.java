@@ -32,15 +32,17 @@ public class ClientHandler implements Runnable {
         try{
             while(true){
                 String line = in.readLine();
+                System.out.println("Client : "+line);
                 //out.println(line);
-                //System.out.println("Client : "+line);
+                /*
                 switch(line){
                     case "TEST":
                         out.println("Menu");
                         break;
                     case "Send":
-                        outToAll("SALUT LES FDP DE CLIENTS");
-                }
+                        outToAll("hey");
+                }*/
+
 
             }
         } catch (IOException e) {

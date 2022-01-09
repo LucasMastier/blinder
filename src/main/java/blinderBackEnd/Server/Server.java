@@ -30,6 +30,9 @@ public class Server {
             ClientHandler clientThread = new ClientHandler(client, clients, games);
             clients.add(clientThread);
             pool.execute(clientThread);
+            for(ClientHandler aClient : clients){
+                System.out.println(aClient+" is connected to the server");
+            }
         }
     }
 
