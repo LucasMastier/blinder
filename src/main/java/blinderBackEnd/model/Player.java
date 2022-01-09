@@ -1,6 +1,8 @@
 package blinderBackEnd.model;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private String username;
     private int score;
 

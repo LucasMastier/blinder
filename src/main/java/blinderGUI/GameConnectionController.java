@@ -112,8 +112,8 @@ public class GameConnectionController {
     @FXML
     public void confirmUsername(ActionEvent event) throws IOException {
         if(!isConnected){
-            PrintWriter out1 = new PrintWriter(socket.getOutputStream());
-            out1.write("AddPlayerToGame "+currentGame.getName()+" "+usernameInput.getText());
+
+            //out.write("AddPlayerToGame "+currentGame.getName()+" "+usernameInput.getText());
 
             Player player = new Player(usernameInput.getText());
 

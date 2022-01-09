@@ -1,6 +1,7 @@
 package blinderGUI;
 
 import blinderBackEnd.Server.Server;
+import blinderBackEnd.model.Player;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -24,10 +25,10 @@ public class MainMenuController {
 
     private Socket socket;
 
-    private BufferedReader in;
-    private PrintWriter out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
-    public void storeSocket(Socket socket, BufferedReader in, PrintWriter out) throws IOException {
+    public void storeSocket(Socket socket, ObjectInputStream in, ObjectOutputStream out) throws IOException {
         this.socket = socket;
         this.in = in;
         this.out = out;
@@ -47,33 +48,6 @@ public class MainMenuController {
 
 
 
-        out.println("Send");
-
-        Service<Void> backgroundThread = new Service<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-
-                        while(true) {
-                            String serverResponse = in.readLine();
-                            switch (serverResponse) {
-                                case "Menu":
-                                    System.out.println("Ok menu");
-                                    break;
-
-                            }
-                        }
-
-                    }
-                };
-            }
-        };
-
-        backgroundThread.restart();
-
-
 
 
     }
@@ -84,7 +58,9 @@ public class MainMenuController {
 
         System.out.println(socket);
 
-        out.println("TEST");
+        Player player = new Player("Saren");
+
+        out.writeObject(player);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),800,500);
@@ -94,9 +70,18 @@ public class MainMenuController {
         stage.show();
 
         MultiplayerGamesListController multiplayerGamesListController = fxmlLoader.getController();
-        multiplayerGamesListController.storeSocket(socket, in, out);
+        //multiplayerGamesListController.storeSocket(socket, in, out);
 
 
     }
+
+    @FXML
+    public void switchToSpotifyTraningMode(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = switchTo(event, "SpotifyTrainingMode.fxml");
+
+
+    }
+
+
 
 }

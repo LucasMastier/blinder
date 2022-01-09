@@ -36,6 +36,7 @@ public class Server {
         }
     }
 
+    /*
     public synchronized void onConnectionReady(ClientHandler conn){
         clients.add(conn);
         sendToAllConnections("Client connect: "+conn);
@@ -53,5 +54,5 @@ public class Server {
         for(int i=0;i<length;i++){
             clients.get(i).sendMessage(mess);
         }
-    }
+    }*/
 }
