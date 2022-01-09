@@ -26,6 +26,7 @@
             <Label text="Bienvenue sur Blinder !" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <Button fx:id="trainingModeButton" mnemonicParsing="false" onAction="#switchToTrainingMode" prefHeight="56.0" prefWidth="183.0" text="Mode entrainement" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#switchToMultiplayerMode" prefHeight="56.0" prefWidth="183.0" text="Mode Multijoueur" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#switchToSpotifyTraningMode" prefHeight="56.0" prefWidth="183.0" text="Mode entrainement Spotify" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>
