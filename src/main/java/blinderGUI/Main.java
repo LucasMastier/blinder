@@ -104,8 +104,13 @@ public class Main extends Application {
         Song tr = new Song("Leto","Tout recommencer", "src/main/resources/mp3files/Tout_recommencer.mp3");
         Song fr = new Song("Freeze Corleone","Freeze raël", "src/main/resources/mp3files/Freeze_Rael.mp3");
         Song hs = new Song("Hamza","HS", "src/main/resources/mp3files/HS.mp3");
-        Song em = new Song("Eminem","Real Slim Shady","src/main/mp3files/eminem.mp3");
-        Song dk = new Song("Drake","God's Plan","src/main/mp3files/drake.mp3");
+        Song em = new Song("Eminem","Real Slim Shady","src/main/resources/mp3files/eminem.mp3");
+        Song dk = new Song("Drake","God's Plan","src/main/resources/mp3files/drake.mp3");
+        Song aw = new Song("Alpha Wann","Le Piège","src/main/resources/mp3files/Alpha_Wann.mp3");
+        Song da = new Song("Damso","Morose","src/main/resources/mp3files/Damso.mp3");
+        Song ni = new Song("Niska","Salé","src/main/resources/mp3files/Niska.mp3");
+        Song pnl = new Song("PNL","Au DD","src/main/resources/mp3files/PNL.mp3");
+
 
         Playlist rap = new Playlist("Rap");
         rap.addToPlaylist(vvs);
@@ -114,7 +119,11 @@ public class Main extends Application {
         rap.addToPlaylist(hs);
         rap.addToPlaylist(em);
         rap.addToPlaylist(dk);
-
+        rap.addToPlaylist(aw);
+        rap.addToPlaylist(da);
+        rap.addToPlaylist(ni);
+        rap.addToPlaylist(pnl);
+        
         PlaylistService.setCurrentPlaylist(rap);
         PlaylistService.addToPlaylists(rap);
 
