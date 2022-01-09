@@ -100,7 +100,7 @@ public class GameConnectionController {
         backgroundThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println("ca marche pas sa mere");
+                System.out.println("Erreur");
             }
         });
 

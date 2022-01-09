@@ -35,9 +35,11 @@ public class TrainingGameController {
     @FXML
     public void initialize(){
         int compt = 0;
+        int myscore=0;
+        int length_playlist = PlaylistService.getCurrentPlaylist().getPlaylist().size();
+        String score=myscore+"/"+length_playlist;
         ArrayList<String> author = getRandomAuthorFromPlaylist(PlaylistService.getCurrentPlaylist());
-        while(compt != 4){
-
+        while(compt != length_playlist){
 
             Button button = new Button(author.get(compt));
             button.setOnAction(new EventHandler() {
@@ -46,6 +48,29 @@ public class TrainingGameController {
                 public void handle(Event event) {
                     if(PlaylistService.checkAuthor(button.getText())){
                         answerLabel.setText("Bonne réponse !");
+
+                        try {
+                            TimeUnit.SECONDS.sleep(3);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Stage stage = (Stage) button.getScene().getWindow();
+                        stage.close();
+                        PlaylistService.mediaPlayer.stop();
+
+                        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+                        Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene scene = null;
+                        try {
+                            scene = new Scene(fxmlLoader.load(),800,500);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        newStage.setScene(scene);
+                        newStage.show();
+
+                    } else {
+                        answerLabel.setText("Mauvaise réponse");
 
 
                         try {
@@ -68,16 +93,11 @@ public class TrainingGameController {
 
                         newStage.setScene(scene);
                         newStage.show();
-
-
-                    } else {
-                        answerLabel.setText("Mauvaise réponse");
                     }
                 }
 
             });
             buttonList.add(button);
-
             compt++;
         }
         buttonsContainer.getChildren().clear();
@@ -99,5 +119,4 @@ public class TrainingGameController {
     public void playSong(ActionEvent event){
         //PlaylistService.playSongFromPlaylist();
     }
-    
 }
