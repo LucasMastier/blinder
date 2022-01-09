@@ -19,6 +19,11 @@ public class PicturelistService {
         currentPicture = randomPicture;
         printPictureFromPicturelist(randomPicture.getPathToFile());
     }
+
+    public static void addToPicturelists(Picturelist picturelist){
+        picturelists.add(picturelist);
+    }
+
     public static Image printPictureFromPicturelist(String path){
         Image image = new Image("file:JavaFXModule/src/main/java/com/example/javafxmodule/images/icon_slack_hash_colored.png");
         return image;
