@@ -1,7 +1,6 @@
 package blinderGUI;
 
 import blinderBackEnd.model.*;
-import blinderBackEnd.model.PlaylistService;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -24,7 +23,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static blinderBackEnd.model.PicturelistService.getRandomAuthorFromPicturelist;
-import static blinderBackEnd.model.PlaylistService.getRandomAuthorFromPlaylist;
 import static blinderGUI.Main.switchTo;
 
 public class TrainingGameImageController {
@@ -44,7 +42,6 @@ public class TrainingGameImageController {
     private boolean nextButtonIsVisible = false;
 
     private List<Button> buttonList = new ArrayList<>();
-
 
     @FXML
     public void initialize() throws MalformedURLException {
