@@ -31,7 +31,7 @@ public class ServerConnection implements Runnable{
 
                 switch(serverResponse.getMessage()){
                     case "UpdatePlayersList":
-                        GameService.getCurrentGame().setPlayersList(serverResponse.getGame().getPlayersList());
+                        
                         break;
                 }
 
