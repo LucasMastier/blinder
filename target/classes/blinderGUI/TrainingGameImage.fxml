@@ -44,7 +44,7 @@
                   <ImageView fx:id="imageView" fitHeight="349.0" fitWidth="360.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextRound" text="Suivant &gt;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextRound" text="Suivant &gt;" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

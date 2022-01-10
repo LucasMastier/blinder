@@ -21,7 +21,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TilePane fx:id="buttonsContainer" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TilePane fx:id="buttonsContainer" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="751.0" text="Choisissez une playlist" GridPane.columnIndex="1" />
          </children>
       </GridPane>

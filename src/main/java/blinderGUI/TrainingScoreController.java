@@ -31,7 +31,7 @@ public class TrainingScoreController {
 
     public void replayTrainingMode(ActionEvent event) throws IOException {
         GameService.setScore_cpt(0);
-        switchTo(event, "TrainingGame.fxml");
+        switchTo(event, "PlaylistChoice.fxml");
     }
 
 }
