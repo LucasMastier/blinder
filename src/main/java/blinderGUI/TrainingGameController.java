@@ -52,6 +52,7 @@ public class TrainingGameController {
                 @Override
                 public void handle(Event event) {
                     if(PlaylistService.checkAuthor(button.getText())){
+                        button.setStyle("-fx-background-color: green; ");
 
                         new Thread(new Runnable() {
                             @Override public void run() {
