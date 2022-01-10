@@ -42,6 +42,7 @@ public class TrainingGameController {
 
     @FXML
     public void initialize(){
+
         int compt = 0;
         if(GameService.getRound_cpt()==0){
             PlaylistService.initializeRandomValues();
