@@ -114,6 +114,12 @@ public class Main extends Application {
         Song ni = new Song("Niska","Salé","src/main/resources/mp3files/Niska.mp3");
         Song pnl = new Song("PNL","Au DD","src/main/resources/mp3files/PNL.mp3");
 
+        Song ad = new Song("Adele","When we were young", "src/main/resources/mp3files/Adele.mp3");
+        Song dp = new Song("Daft Punk","Get lucky", "src/main/resources/mp3files/Daft_Punk.mp3");
+        Song jb = new Song("Justin Bieber","Love yourself", "src/main/resources/mp3files/Justin_Bieber.mp3");
+        Song mj = new Song("Michael Jackson","Billie Jean", "src/main/resources/mp3files/Michael_Jackson.mp3");
+        Song qn = new Song("Queen","Don't stop me now", "src/main/resources/mp3files/Queen.mp3");
+
         Playlist rap = new Playlist("Rap");
         rap.addToPlaylist(vvs);
         rap.addToPlaylist(tr);
@@ -126,9 +132,16 @@ public class Main extends Application {
         rap.addToPlaylist(ni);
         rap.addToPlaylist(pnl);
 
+        Playlist pop = new Playlist("Pop");
+        pop.addToPlaylist(ad);
+        pop.addToPlaylist(dp);
+        pop.addToPlaylist(jb);
+        pop.addToPlaylist(mj);
+        pop.addToPlaylist(qn);
+
         PlaylistService.setCurrentPlaylist(rap);
         PlaylistService.addToPlaylists(rap);
-
+        PlaylistService.addToPlaylists(pop);
 
         Picture ninho = new Picture("Ninho","file:src/main/resources/jpgfiles/ninho.jpg");
         Picture leto = new Picture("Leto","file:src/main/resources/jpgfiles/leto.jpg");
