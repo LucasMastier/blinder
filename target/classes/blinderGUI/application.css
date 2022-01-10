@@ -3,14 +3,14 @@
 
 
     /* CSS HEX */
-    turquoise-blue: #7cfef0ff;
-    medium-spring-green: #6bffb8ff;
-    medium-spring-green-2: #2ceaa3ff;
-    spanish-green: #28965aff;
-    hunter-green: #2a6041ff;
+    sky-blue-crayola: #65def1ff;
+    jet: #343434ff;
+    space-cadet: #2f3061ff;
+    taupe-gray: #565656;
+    medium-spring-green: #71f79fff;
 
 
-    -fx-text-fill : turquoise-blue;
+    -fx-text-fill : sky-blue-crayola;
 }
 
 .inputs{
@@ -25,10 +25,18 @@
 
 
 .button{
-    -fx-background-color : spanish-green;
+    -fx-background-color : taupe-gray;
+    -fx-border-color: sky-blue-crayola;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-cursor: hand;
 }
 
 
 .background{
-    -fx-background-color : hunter-green;
+    -fx-background-color : jet;
+}
+
+.title{
+    -fx-font: 30px "Lato Light";
 }

@@ -130,16 +130,16 @@ public class Main extends Application {
         PlaylistService.addToPlaylists(rap);
 
 
-        Picture ninho = new Picture("Ninho","src/main/resources/jpgfiles/ninho.jpg");
-        Picture leto = new Picture("Leto","src/main/resources/jpgfiles/leto.jpg");
-        Picture fc = new Picture("Freeze Corleone","src/main/resources/jpgfiles/freeze-corleone.jpg");
-        Picture hamza = new Picture("Hamza","src/main/resources/jpgfiles/hamza.jpg");
-        Picture eminem = new Picture("Eminem","src/main/resources/jpgfiles/eminem.jpg");
-        Picture drake = new Picture("Drake","src/main/resources/jpgfiles/drake.jpg");
-        Picture alpha = new Picture("Alpha Wann","src/main/resources/jpgfiles/alpha.jpg");
-        Picture damso = new Picture("Damso","src/main/resources/jpgfiles/damso.jpg");
-        Picture niska = new Picture("Niska","src/main/resources/jpgfiles/niska.jpg");
-        Picture pnl2 = new Picture("PNL","src/main/resources/jpgfiles/pnl.jpg");
+        Picture ninho = new Picture("Ninho","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\ninho.jpg");
+        Picture leto = new Picture("Leto","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\leto.jpg");
+        Picture fc = new Picture("Freeze Corleone","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\freeze-corleone.jpg");
+        Picture hamza = new Picture("Hamza","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\hamza.jpg");
+        Picture eminem = new Picture("Eminem","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\eminem.jpg");
+        Picture drake = new Picture("Drake","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\drake.jpg");
+        Picture alpha = new Picture("Alpha Wann","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\alpha-wann.jpg");
+        Picture damso = new Picture("Damso","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\damso.jpg");
+        Picture niska = new Picture("Niska","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\niska.jpg");
+        Picture pnl2 = new Picture("PNL","C:\\Users\\U1\\Documents\\GitHub\\blinder\\src\\main\\resources\\jpgfiles\\pnl.jpg");
 
         Picturelist rappeur = new Picturelist("Rappeur");
         rappeur.addToPicturelist(ninho);

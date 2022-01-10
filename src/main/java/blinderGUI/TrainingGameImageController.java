@@ -40,6 +40,7 @@ public class TrainingGameImageController {
 
     private List<Button> buttonList = new ArrayList<>();
 
+
     @FXML
     public void initialize() throws MalformedURLException {
 
@@ -87,7 +88,7 @@ public class TrainingGameImageController {
                             Stage stage = (Stage) button.getScene().getWindow();
                             stage.close();
 
-                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGameImage.fxml"));
                             Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             Scene scene = null;
                             try {
@@ -132,7 +133,7 @@ public class TrainingGameImageController {
                             Stage stage = (Stage) button.getScene().getWindow();
                             stage.close();
 
-                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGameImage.fxml"));
                             Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             Scene scene = null;
                             try {
