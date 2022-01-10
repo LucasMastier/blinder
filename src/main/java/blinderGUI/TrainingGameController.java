@@ -38,6 +38,8 @@ public class TrainingGameController {
     @FXML
     private Button nextButton;
 
+    private boolean nextButtonIsVisible = false;
+
     private List<Button> buttonList = new ArrayList<>();
 
     @FXML
@@ -54,19 +56,20 @@ public class TrainingGameController {
 
                 @Override
                 public void handle(Event event) {
-                    if(PlaylistService.checkAuthor(button.getText())) {
+                    if(PlaylistService.checkAuthor(button.getText()) && !nextButtonIsVisible) {
                         button.setStyle("-fx-background-color: green; ");
                         answerLabel.setText("Bonne réponse !");
                         GameService.setScore_cpt(GameService.getScore_cpt() + 1);
                         GameService.setRound_cpt(GameService.getRound_cpt() + 1);
 
-                    } else {
+                    }
+                    if(!PlaylistService.checkAuthor(button.getText()) && !nextButtonIsVisible){
                         answerLabel.setText("Mauvaise réponse");
                         button.setStyle("-fx-background-color: red; ");
                         GameService.setRound_cpt(GameService.getRound_cpt()+1);
-
                     }
                     nextButton.setVisible(true);
+                    nextButtonIsVisible = true;
                     }
 
             });
