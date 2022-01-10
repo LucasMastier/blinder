@@ -38,6 +38,11 @@ public class TrainingGameImageController {
     @FXML
     ImageView imageView;
 
+    @FXML
+    private Button nextButton;
+
+    private boolean nextButtonIsVisible = false;
+
     private List<Button> buttonList = new ArrayList<>();
 
 
@@ -56,97 +61,20 @@ public class TrainingGameImageController {
 
                 @Override
                 public void handle(Event event) {
-                    if(PicturelistService.checkAuthor(button.getText())){
+                    if(PicturelistService.checkAuthor(button.getText()) && !nextButtonIsVisible) {
+                        button.setStyle("-fx-background-color: green; ");
                         answerLabel.setText("Bonne réponse !");
-                        GameService.setScore_cpt(GameService.getScore_cpt()+1);
-                        GameService.setRound_cpt(GameService.getRound_cpt()+1);
-
-
-                        if(GameService.getRound_cpt()==5){
-                            //switchTo tableau des scores
-                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingScore.fxml"));
-
-                            //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load(),800,500);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            stage.setScene(scene);
-                            stage.show();
-                            GameService.setRound_cpt(0);
-
-                        } else {
-                            try {
-                                TimeUnit.SECONDS.sleep(3);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            Stage stage = (Stage) button.getScene().getWindow();
-                            stage.close();
-
-                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGameImage.fxml"));
-                            Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load(),800,500);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            newStage.setScene(scene);
-                            newStage.show();
-                        }
-
-
-
-                    } else {
-                        answerLabel.setText("Mauvaise réponse");
-                        GameService.setRound_cpt(GameService.getRound_cpt()+1);
-
-                        if(GameService.getRound_cpt()==5){
-                            //switchTo tableau des scores
-                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingScore.fxml"));
-
-                            //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load(),800,500);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            stage.setScene(scene);
-                            stage.show();
-                            GameService.setRound_cpt(0);
-
-                        } else {
-                            try {
-                                TimeUnit.SECONDS.sleep(3);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            Stage stage = (Stage) button.getScene().getWindow();
-                            stage.close();
-
-                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGameImage.fxml"));
-                            Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load(),800,500);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            newStage.setScene(scene);
-                            newStage.show();
-                        }
+                        GameService.setScore_cpt(GameService.getScore_cpt() + 1);
+                        GameService.setRound_cpt(GameService.getRound_cpt() + 1);
 
                     }
+                    if(!PicturelistService.checkAuthor(button.getText()) && !nextButtonIsVisible){
+                        answerLabel.setText("Mauvaise réponse");
+                        button.setStyle("-fx-background-color: red; ");
+                        GameService.setRound_cpt(GameService.getRound_cpt()+1);
+                    }
+                    nextButton.setVisible(true);
+                    nextButtonIsVisible = true;
                 }
 
             });
@@ -177,6 +105,16 @@ public class TrainingGameImageController {
 
     public void printPicture(ActionEvent event){
         //PicturelistService.printPictureFromPicturelist();
+    }
+
+    public void nextRound(ActionEvent event) throws IOException {
+        if(GameService.getRound_cpt()==5){
+            switchTo(event, "TrainingScore.fxml");
+            GameService.setRound_cpt(0);
+        } else {
+            switchTo(event,"TrainingGameImage.fxml");
+        }
+
     }
 
 }
