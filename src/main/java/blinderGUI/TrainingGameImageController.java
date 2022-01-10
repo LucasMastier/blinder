@@ -106,7 +106,7 @@ public class TrainingGameImageController {
 
     public void nextRound(ActionEvent event) throws IOException {
         if(GameService.getRound_cpt()==5){
-            switchTo(event, "TrainingScore.fxml");
+            switchTo(event, "TrainingScoreImage.fxml");
             GameService.setRound_cpt(0);
         } else {
             switchTo(event,"TrainingGameImage.fxml");
