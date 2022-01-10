@@ -5,6 +5,7 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class PlaylistService {
@@ -13,11 +14,16 @@ public class PlaylistService {
     private static ArrayList<Integer> randomValues = new ArrayList<>();
     public static MediaPlayer mediaPlayer;
     private static ArrayList<Playlist> playlists = new ArrayList<>();
+    private static int numberOfRounds;
 
     public static void playRandomSongFromPlaylist(Playlist playlist){
-        int randomNumber = (int)(Math.random() * ((playlist.getPlaylist().size())));
-        Song randomSong = playlist.getPlaylist().get(randomNumber);
+        int i = 0;
+        while(randomValues.get(i)==0){
+            i++;
+        }
+        Song randomSong = playlist.getPlaylist().get(i);
         currentSong = randomSong;
+        randomValues.set(i,0);
         playSongFromPlaylist(randomSong.getPathToFile());
     }
 
@@ -34,8 +40,7 @@ public class PlaylistService {
     public static void initializeRandomValues(){
         randomValues.clear();
 
-        int playlistSize = PlaylistService.getCurrentPlaylist().getPlaylist().size();
-        for (int i = 0; i < playlistSize; i++) {
+        for (int i = 0; i < numberOfRounds; i++) {
             randomValues.add(i);
             //System.out.println(i);
         }
@@ -45,11 +50,11 @@ public class PlaylistService {
 
     public static ArrayList<String> getRandomAuthorFromPlaylist(Playlist playlist){
         ArrayList<String> randomAuthors = new ArrayList<>();
-
-        initializeRandomValues();
+        ArrayList<Integer> randomIndexes = new ArrayList<>(Arrays.asList(0,1,2,3));
+        Collections.shuffle(randomIndexes);
 
         for(int i = 0; i < 4; i++){
-            randomAuthors.add(playlist.getPlaylist().get(randomValues.get(i)).getAuteur());
+            randomAuthors.add(playlist.getPlaylist().get(randomIndexes.get(i)).getAuteur());
 
         }
         return randomAuthors;
@@ -84,4 +89,7 @@ public class PlaylistService {
     }
 
 
+    public static void setNumberOfRounds(int numberOfRounds) {
+        PlaylistService.numberOfRounds = numberOfRounds;
+    }
 }

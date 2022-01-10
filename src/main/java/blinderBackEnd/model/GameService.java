@@ -8,11 +8,7 @@ public class GameService {
 
     private static int score_cpt=0;
 
-    private static String score=score_cpt+"/5";
-
     private static ArrayList<Game> games = new ArrayList<>();
-
-    private static Game currentGame;
 
     public static void addGameToList(Game game){
         games.add(game);
@@ -29,10 +25,4 @@ public class GameService {
     public static void setRound_cpt(int r){round_cpt=r;}
 
     public static void setScore_cpt(int s){score_cpt=s;}
-
-    public static String getScore(){return score;}
-
-    public static Game getCurrentGame() {
-        return currentGame;
-    }
 }
