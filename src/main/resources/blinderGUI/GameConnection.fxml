@@ -35,6 +35,7 @@
             <Label fx:id="warning" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" onAction="#updateConnectedPlayersOnClick" text="Rafraichir la liste" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" onAction="#updateConnectedPlayers" text="Rafraichir l'interface" GridPane.rowIndex="5" />
+            <Button fx:id="launchGameButton" mnemonicParsing="false" text="Lancer la partie" visible="false" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

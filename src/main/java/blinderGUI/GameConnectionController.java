@@ -156,6 +156,9 @@ public class GameConnectionController {
                                 }
 
                                 GameService.setCurrentGame(currentGameUpdated);
+                                if(GameService.getCurrentGame().getPlayersList().size()==3){
+                                    allPlayersAreConnected = true;
+                                }
                             }
 
 
