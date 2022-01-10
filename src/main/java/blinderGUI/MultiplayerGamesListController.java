@@ -57,7 +57,7 @@ public class MultiplayerGamesListController {
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = null;
                     try {
-                        scene = new Scene(fxmlLoader.load(),800,500);
+                        scene = new Scene(fxmlLoader.load(),1920,1080);
 
                     } catch (IOException e) {
                         e.printStackTrace();

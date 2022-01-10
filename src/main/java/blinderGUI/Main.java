@@ -27,7 +27,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainMenu.fxml"));
 
 
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Blinder");
         stage.setScene(scene);
         stage.show();
@@ -94,7 +94,7 @@ public class Main extends Application {
 
         //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(),800,500);
+        Scene scene = new Scene(fxmlLoader.load(),1920,1080);
 
         stage.setScene(scene);
         stage.show();

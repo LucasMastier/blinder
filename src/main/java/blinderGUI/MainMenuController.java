@@ -43,7 +43,7 @@ public class MainMenuController {
         FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(),800,500);
+        Scene scene = new Scene(fxmlLoader.load(),1920,1080);
 
         stage.setScene(scene);
         stage.show();
@@ -59,7 +59,7 @@ public class MainMenuController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MultiplayerGamesList.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(),800,500);
+        Scene scene = new Scene(fxmlLoader.load(),1920,1080);
 
 
         stage.setScene(scene);

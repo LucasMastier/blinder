@@ -26,6 +26,7 @@ public class TrainingScoreController {
 
     public void switchToMainMenu(ActionEvent event) throws IOException {
         switchTo(event, "MainMenu.fxml");
+        GameService.setScore_cpt(0);
     }
 
     public void replayTrainingMode(ActionEvent event) throws IOException {
