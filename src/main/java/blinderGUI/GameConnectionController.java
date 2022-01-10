@@ -137,37 +137,32 @@ public class GameConnectionController {
 
             updateConnectedPlayers();
 
-            new Thread(new Runnable() {
-                @Override public void run() {
-                    Platform.runLater(new Runnable(){
-                        @Override
-                        public void run() {
-                            while(true){
 
+
+            Service<Void> backgroundThreadUpdatePlayersList = new Service<Void>() {
+                @Override
+                protected Task<Void> createTask() {
+                    return new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            while(true){
                                 System.out.println(in);
                                 System.out.println("avant in");
-                                Game currentGameUpdated = null;
-                                try {
-                                    currentGameUpdated = (Game) in.readObject();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                } catch (ClassNotFoundException e) {
-                                    e.printStackTrace();
-                                }
+                                Game currentGameUpdated = (Game) in.readObject();
                                 System.out.println("apres in");
                                 System.out.println("Received updated game "+currentGameUpdated.getName()+" from server");
 
                                 GameService.setCurrentGame(currentGameUpdated);
                                 updateConnectedPlayers();
                             }
+
+
                         }
-                    });
-                            }
-                        }).start();
+                    };
+                }
+            };
 
-
-
-
+            backgroundThreadUpdatePlayersList.restart();
 
 
 
