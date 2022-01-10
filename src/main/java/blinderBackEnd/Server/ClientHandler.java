@@ -83,15 +83,15 @@ public class ClientHandler implements Runnable {
     }
 
     public void updateAllGamePlayersList(Game game) throws IOException {
-        for(ClientHandler client : Server.getClients()){
-            System.out.println(client.out);
-            client.out.writeObject(game);
-            System.out.println("Updated players list for "+client);
-        }
         System.out.println("Joueurs présents :");
         for(Player player : game.getPlayersList()){
             System.out.println(player.getUsername());
         }
+        for(ClientHandler client : Server.getClients()){
+            client.out.writeObject(game);
+            System.out.println("Updated players list for "+client);
+        }
+
     }
 
     /*

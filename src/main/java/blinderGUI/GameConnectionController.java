@@ -151,9 +151,11 @@ public class GameConnectionController {
                                 Game currentGameUpdated = (Game) in.readObject();
                                 System.out.println("apres in");
                                 System.out.println("Received updated game "+currentGameUpdated.getName()+" from server");
+                                for(Player player : currentGameUpdated.getPlayersList()){
+                                    System.out.println(player.getUsername()+" est dans la liste des joueurs de la game updated");
+                                }
 
                                 GameService.setCurrentGame(currentGameUpdated);
-                                updateConnectedPlayers();
                             }
 
 
@@ -182,10 +184,11 @@ public class GameConnectionController {
 
     }
 
-
+    @FXML
     public void updateConnectedPlayers(){
         playersContainer.getChildren().clear();
         for(Player player : GameService.getCurrentGame().getPlayersList()){
+            System.out.println(player.getUsername()+" est présent dans la game");
             playersContainer.getChildren().add(new Label(player.getUsername()));
         }
     }
@@ -203,26 +206,11 @@ public class GameConnectionController {
         Request request2 = new Request("UpdatePlayersList", GameService.getCurrentGame());
         out.writeObject(request2);
 
-
-
-        /*
-
-            ArrayList<Player> updatedPlayersList = (ArrayList<Player>) in.readObject();
-
-
-            currentGame.setPlayersList(updatedPlayersList);
-            for(Player players : currentGame.getPlayersList()){
-                System.out.println(players.getUsername()+" est connecté a la partie");
-            }
-            /*
-            playersContainer.getChildren().clear();
-            for (Player player : updatedPlayersList) {
-                System.out.println(player.getUsername() + " est présent");
-                playersContainer.getChildren().add(new Label(player.getUsername()));
-            }*/
-
-            //System.out.println("Fin du thread");
+        for(Player player : GameService.getCurrentGame().getPlayersList()){
+            System.out.println(player.getUsername()+" est connecté a la partie");
+        }
     }
+
 
 
 }

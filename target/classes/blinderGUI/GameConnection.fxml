@@ -13,7 +13,7 @@
    <children>
       <GridPane prefHeight="717.0" prefWidth="1250.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -34,6 +34,7 @@
             <Label text="Joueurs présents :" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="warning" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" onAction="#updateConnectedPlayersOnClick" text="Rafraichir la liste" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button mnemonicParsing="false" onAction="#updateConnectedPlayers" text="Rafraichir l'interface" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>
