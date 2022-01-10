@@ -35,6 +35,9 @@ public class TrainingGameController {
     @FXML
     private Label answerLabel;
 
+    @FXML
+    private Button nextButton;
+
     private List<Button> buttonList = new ArrayList<>();
 
     @FXML
@@ -51,118 +54,20 @@ public class TrainingGameController {
 
                 @Override
                 public void handle(Event event) {
-                    if(PlaylistService.checkAuthor(button.getText())){
+                    if(PlaylistService.checkAuthor(button.getText())) {
                         button.setStyle("-fx-background-color: green; ");
-
-                        new Thread(new Runnable() {
-                            @Override public void run() {
-                                    Platform.runLater(new Runnable() {
-                                        @Override public void run() {
-                                            answerLabel.setText("Bonne réponse !");
-                                        }
-                                    });
-                                }
-                            }).start();
-
                         answerLabel.setText("Bonne réponse !");
-                        GameService.setScore_cpt(GameService.getScore_cpt()+1);
-                        GameService.setRound_cpt(GameService.getRound_cpt()+1);
-
-
-                        if(GameService.getRound_cpt()==5){
-                            PlaylistService.mediaPlayer.stop();
-                            //switchTo tableau des scores
-                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingScore.fxml"));
-
-                            //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load(),800,500);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            stage.setScene(scene);
-                            stage.show();
-                            GameService.setRound_cpt(0);
-
-                        } else {
-                            try {
-                                answerLabel.setText("Bonne réponse !");
-                                TimeUnit.SECONDS.sleep(3);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            answerLabel.setText("Bonne réponse !");
-                            Stage stage = (Stage) button.getScene().getWindow();
-                            stage.close();
-                            PlaylistService.mediaPlayer.stop();
-
-                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
-                            Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load(),800,500);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            newStage.setScene(scene);
-                            newStage.show();
-                        }
-
-
+                        GameService.setScore_cpt(GameService.getScore_cpt() + 1);
+                        GameService.setRound_cpt(GameService.getRound_cpt() + 1);
 
                     } else {
                         answerLabel.setText("Mauvaise réponse");
+                        button.setStyle("-fx-background-color: red; ");
                         GameService.setRound_cpt(GameService.getRound_cpt()+1);
 
-                        if(GameService.getRound_cpt()==5){
-                            PlaylistService.mediaPlayer.stop();
-                            //switchTo tableau des scores
-                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingScore.fxml"));
-
-                            //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load(),800,500);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            stage.setScene(scene);
-                            stage.show();
-                            GameService.setRound_cpt(0);
-
-                        } else {
-                            try {
-                                answerLabel.setText("Mauvaise réponse");
-                                TimeUnit.SECONDS.sleep(3);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            answerLabel.setText("Mauvaise réponse");
-                            Stage stage = (Stage) button.getScene().getWindow();
-                            stage.close();
-                            PlaylistService.mediaPlayer.stop();
-
-                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
-                            Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load(),800,500);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            newStage.setScene(scene);
-                            newStage.show();
-                        }
-
                     }
-                }
+                    nextButton.setVisible(true);
+                    }
 
             });
             buttonList.add(button);
@@ -187,6 +92,18 @@ public class TrainingGameController {
 
     public void playSong(ActionEvent event){
         //PlaylistService.playSongFromPlaylist();
+    }
+
+    public void nextRound(ActionEvent event) throws IOException {
+        if(GameService.getRound_cpt()==5){
+            PlaylistService.mediaPlayer.stop();
+            switchTo(event, "TrainingScore.fxml");
+            GameService.setRound_cpt(0);
+        } else {
+            PlaylistService.mediaPlayer.stop();
+            switchTo(event,"TrainingGame.fxml");
+        }
+
     }
     
 }
