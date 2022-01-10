@@ -130,16 +130,16 @@ public class Main extends Application {
         PlaylistService.addToPlaylists(rap);
 
 
-        Picture ninho = new Picture("Ninho","file:///src/main/resources/jpgfiles/ninho.jpg");
-        Picture leto = new Picture("Leto","file:///src/main/resources/jpgfiles/leto.jpg");
-        Picture fc = new Picture("Freeze Corleone","file:///src/main/resources/jpgfiles/freeze-corleone.jpg");
-        Picture hamza = new Picture("Hamza","file:///src/main/resources/jpgfiles/hamza.jpg");
-        Picture eminem = new Picture("Eminem","file:///src/main/resources/jpgfiles/eminem.jpg");
-        Picture drake = new Picture("Drake","file:///src/main/resources/jpgfiles/drake.jpg");
-        Picture alpha = new Picture("Alpha Wann","file:///src/main/resources/jpgfiles/alpha-wann.jpg");
-        Picture damso = new Picture("Damso","file:///src/main/resources/jpgfiles/damso.jpg");
-        Picture niska = new Picture("Niska","file:///src/main/resources/jpgfiles/niska.jpg");
-        Picture pnl2 = new Picture("PNL","file:///src/main/resources/jpgfiles/pnl.jpg");
+        Picture ninho = new Picture("Ninho","file:src/main/resources/jpgfiles/ninho.jpg");
+        Picture leto = new Picture("Leto","file:src/main/resources/jpgfiles/leto.jpg");
+        Picture fc = new Picture("Freeze Corleone","file:src/main/resources/jpgfiles/freeze-corleone.jpg");
+        Picture hamza = new Picture("Hamza","file:src/main/resources/jpgfiles/hamza.jpg");
+        Picture eminem = new Picture("Eminem","file:src/main/resources/jpgfiles/eminem.jpg");
+        Picture drake = new Picture("Drake","file:src/main/resources/jpgfiles/drake.jpg");
+        Picture alpha = new Picture("Alpha Wann","file:src/main/resources/jpgfiles/alpha-wann.jpg");
+        Picture damso = new Picture("Damso","file:src/main/resources/jpgfiles/damso.jpg");
+        Picture niska = new Picture("Niska","file:src/main/resources/jpgfiles/niska.jpg");
+        Picture pnl2 = new Picture("PNL","file:src/main/resources/jpgfiles/pnl.jpg");
 
         Picturelist rappeur = new Picturelist("Rappeur");
         rappeur.addToPicturelist(ninho);
