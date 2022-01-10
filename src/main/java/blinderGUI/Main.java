@@ -2,6 +2,7 @@ package blinderGUI;
 
 import blinderBackEnd.Server.Client;
 import blinderBackEnd.Server.Server;
+import blinderBackEnd.Server.ServerConnection;
 import blinderBackEnd.model.*;
 import javafx.application.Application;
 import javafx.concurrent.Service;
@@ -33,6 +34,8 @@ public class Main extends Application {
 
 
         Socket socket = new Socket("localhost", Server.PORT);
+
+
         //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         //PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 

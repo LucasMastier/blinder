@@ -33,7 +33,7 @@ public class ClientHandler implements Runnable {
                 Request request = (Request) in.readObject();
 
                 switch(request.getMessage()){
-                    case"AddPlayerToGame":
+                    /*case"AddPlayerToGame":
                         System.out.println("Received player "+request.getPlayer().getUsername()+" from client");
                         for(Game serverGame : Server.getGames()){
                             System.out.println(serverGame.getName());
@@ -44,6 +44,18 @@ public class ClientHandler implements Runnable {
                         }
                         //updateAllGamePlayersList(request.getGame());
 
+                        break;*/
+
+                    case"AddPlayerToGame":
+                        System.out.println("Received player "+request.getPlayer().getUsername()+" from client");
+                        for(Game serverGame : Server.getGames()) {
+                            System.out.println(serverGame.getName());
+                            if (serverGame.getName().equals(request.getGame().getName())) {
+                                serverGame.addPlayer(request.getPlayer());
+                                Request updateClientPlayersList = new Request("UpdatePlayersList", serverGame);
+                                out.writeObject(updateClientPlayersList);
+                            }
+                        }
                         break;
 
                     case"test":
@@ -62,8 +74,6 @@ public class ClientHandler implements Runnable {
                         break;
 
                 }
-
-
 
             }
         } catch (IOException | ClassNotFoundException e) {
