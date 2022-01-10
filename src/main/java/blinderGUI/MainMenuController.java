@@ -64,7 +64,7 @@ public class MainMenuController {
 
         stage.setScene(scene);
         stage.show();
-
+        System.out.println(socket);
         MultiplayerGamesListController multiplayerGamesListController = fxmlLoader.getController();
         multiplayerGamesListController.storeSocket(socket, in, out);
 

@@ -65,7 +65,7 @@ public class MultiplayerGamesListController {
 
                     stage.setScene(scene);
                     stage.show();
-
+                    System.out.println(socket);
                     GameConnectionController gameConnectionController = fxmlLoader.getController();
                     try {
                         gameConnectionController.storeSocketAndGame(socket, in, out, game);

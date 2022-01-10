@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blinderGUI.MultiplayerGamesListController">
+<VBox styleClass="background" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blinderGUI.MultiplayerGamesListController">
    <children>
       <GridPane>
          <columnConstraints>
