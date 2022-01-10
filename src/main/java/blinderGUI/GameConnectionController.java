@@ -137,35 +137,39 @@ public class GameConnectionController {
 
             updateConnectedPlayers();
 
-
-
-            Service<Void> backgroundThreadUpdatePlayersList = new Service<Void>() {
-                @Override
-                protected Task<Void> createTask() {
-                    return new Task<Void>() {
+            new Thread(new Runnable() {
+                @Override public void run() {
+                    Platform.runLater(new Runnable(){
                         @Override
-                        protected Void call() throws Exception {
+                        public void run() {
                             while(true){
+
                                 System.out.println(in);
                                 System.out.println("avant in");
-                                Game currentGameUpdated = (Game) in.readObject();
+                                Game currentGameUpdated = null;
+                                try {
+                                    currentGameUpdated = (Game) in.readObject();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (ClassNotFoundException e) {
+                                    e.printStackTrace();
+                                }
                                 System.out.println("apres in");
                                 System.out.println("Received updated game "+currentGameUpdated.getName()+" from server");
 
                                 GameService.setCurrentGame(currentGameUpdated);
                                 updateConnectedPlayers();
                             }
-
-
                         }
-                    };
-                }
-            };
+                    });
+                            }
+                        }).start();
 
-            backgroundThreadUpdatePlayersList.restart();
 
-            Request request2 = new Request("UpdatePlayersList", GameService.getCurrentGame());
-            out.writeObject(request2);
+
+
+
+
 
 
             isConnected = true;
@@ -201,7 +205,8 @@ public class GameConnectionController {
     @FXML
     public void updateConnectedPlayersOnClick(ActionEvent event) throws IOException, ClassNotFoundException {
 
-
+        Request request2 = new Request("UpdatePlayersList", GameService.getCurrentGame());
+        out.writeObject(request2);
 
 
 
