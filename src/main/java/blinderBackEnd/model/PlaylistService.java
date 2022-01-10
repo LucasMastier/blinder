@@ -17,13 +17,9 @@ public class PlaylistService {
     private static int numberOfRounds;
 
     public static void playRandomSongFromPlaylist(Playlist playlist){
-        int i = 0;
-        while(randomValues.get(i)==0){
-            i++;
-        }
+        int i = randomValues.get(GameService.getRound_cpt());
         Song randomSong = playlist.getPlaylist().get(i);
         currentSong = randomSong;
-        randomValues.set(i,0);
         playSongFromPlaylist(randomSong.getPathToFile());
     }
 
@@ -42,7 +38,6 @@ public class PlaylistService {
 
         for (int i = 0; i < currentPlaylist.getPlaylist().size(); i++) {
             randomValues.add(i);
-            //System.out.println(i);
         }
         Collections.shuffle(randomValues);
 
@@ -50,13 +45,12 @@ public class PlaylistService {
 
     public static ArrayList<String> getRandomAuthorFromPlaylist(Playlist playlist){
         ArrayList<String> randomAuthors = new ArrayList<>();
-        ArrayList<Integer> randomIndexes = new ArrayList<>(Arrays.asList(0,1,2,3));
-        Collections.shuffle(randomIndexes);
 
-        for(int i = 0; i < 4; i++){
-            randomAuthors.add(playlist.getPlaylist().get(randomIndexes.get(i)).getAuteur());
 
+        for(int i = 0; i < currentPlaylist.getPlaylist().size(); i++){
+            randomAuthors.add(playlist.getPlaylist().get(i).getAuteur());
         }
+        Collections.shuffle(randomAuthors);
         return randomAuthors;
     }
 
