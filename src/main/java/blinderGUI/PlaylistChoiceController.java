@@ -36,22 +36,14 @@ public class PlaylistChoiceController {
 
                 @Override
                 public void handle(Event event) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GameCreation.fxml"));
-                    try {
-                        Parent root = loader.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    PlaylistService.setCurrentPlaylist(playlist);
+                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingGame.fxml"));
 
-                    GameCreationController gameCreationController = loader.getController();
-                    gameCreationController.storePlaylistInstance(playlist);
-
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameCreation.fxml"));
+                    //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = null;
                     try {
-                        scene = new Scene(fxmlLoader.load(),800,500);
+                        scene = new Scene(fxmlLoader.load(),1920,1080);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

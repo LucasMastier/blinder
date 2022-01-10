@@ -40,7 +40,7 @@ public class MainMenuController {
 
     @FXML
     public void switchToTrainingMode(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("PlaylistChoice.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),1920,1080);
