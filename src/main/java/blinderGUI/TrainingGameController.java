@@ -3,6 +3,9 @@ package blinderGUI;
 import blinderBackEnd.model.GameService;
 import blinderBackEnd.model.Playlist;
 import blinderBackEnd.model.PlaylistService;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -49,6 +52,17 @@ public class TrainingGameController {
                 @Override
                 public void handle(Event event) {
                     if(PlaylistService.checkAuthor(button.getText())){
+
+                        new Thread(new Runnable() {
+                            @Override public void run() {
+                                    Platform.runLater(new Runnable() {
+                                        @Override public void run() {
+                                            answerLabel.setText("Bonne réponse !");
+                                        }
+                                    });
+                                }
+                            }).start();
+
                         answerLabel.setText("Bonne réponse !");
                         GameService.setScore_cpt(GameService.getScore_cpt()+1);
                         GameService.setRound_cpt(GameService.getRound_cpt()+1);
@@ -74,10 +88,12 @@ public class TrainingGameController {
 
                         } else {
                             try {
+                                answerLabel.setText("Bonne réponse !");
                                 TimeUnit.SECONDS.sleep(3);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            answerLabel.setText("Bonne réponse !");
                             Stage stage = (Stage) button.getScene().getWindow();
                             stage.close();
                             PlaylistService.mediaPlayer.stop();
@@ -121,10 +137,12 @@ public class TrainingGameController {
 
                         } else {
                             try {
+                                answerLabel.setText("Mauvaise réponse");
                                 TimeUnit.SECONDS.sleep(3);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            answerLabel.setText("Mauvaise réponse");
                             Stage stage = (Stage) button.getScene().getWindow();
                             stage.close();
                             PlaylistService.mediaPlayer.stop();
