@@ -78,6 +78,7 @@ public class GameConnectionController {
 
                         while(true){
                             if(allPlayersAreConnected){
+                                System.out.println("Bouton Lancer la partie saffiche");
                                 launchGameButton.setVisible(true);
                                 break;
                             }
