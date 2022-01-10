@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blinderGUI.GameConnectionController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1250.0" styleClass="background" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blinderGUI.GameConnectionController">
    <children>
       <GridPane prefHeight="717.0" prefWidth="1250.0">
         <columnConstraints>
@@ -30,7 +30,7 @@
             <Button fx:id="confirmButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#confirmUsername" text="Valider" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="831.0" text="Entrez un pseudo afin de rejoindre la partie" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="usernameInput" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TilePane fx:id="playersContainer" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TilePane fx:id="playersContainer" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Joueurs présents :" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="warning" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" onAction="#updateConnectedPlayersOnClick" text="Rafraichir la liste" GridPane.columnIndex="2" GridPane.rowIndex="5" />
