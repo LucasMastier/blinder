@@ -40,7 +40,7 @@ public class PlaylistService {
     public static void initializeRandomValues(){
         randomValues.clear();
 
-        for (int i = 0; i < numberOfRounds; i++) {
+        for (int i = 0; i < currentPlaylist.getPlaylist().size(); i++) {
             randomValues.add(i);
             //System.out.println(i);
         }
