@@ -114,7 +114,6 @@ public class Main extends Application {
         Song ni = new Song("Niska","Salé","src/main/resources/mp3files/Niska.mp3");
         Song pnl = new Song("PNL","Au DD","src/main/resources/mp3files/PNL.mp3");
 
-
         Playlist rap = new Playlist("Rap");
         rap.addToPlaylist(vvs);
         rap.addToPlaylist(tr);
@@ -129,6 +128,33 @@ public class Main extends Application {
 
         PlaylistService.setCurrentPlaylist(rap);
         PlaylistService.addToPlaylists(rap);
+
+
+        Picture ninho = new Picture("Ninho","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\ninho.jpg");
+        Picture leto = new Picture("Leto","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\leto.jpg");
+        Picture fc = new Picture("Freeze Corleone","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\freeze-corleone.jpg");
+        Picture hamza = new Picture("Hamza","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\hamza.jpg");
+        Picture eminem = new Picture("Eminem","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\eminem.jpg");
+        Picture drake = new Picture("Drake","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\drake.jpg");
+        Picture alpha = new Picture("Alpha Wann","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\alpha-wann.jpg");
+        Picture damso = new Picture("Damso","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\damso.jpg");
+        Picture niska = new Picture("Niska","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\niska.jpg");
+        Picture pnl2 = new Picture("PNL","X:\\LU2IN\\LU3IN102\\blinder\\src\\main\\resources\\jpgfiles\\pnl.jpg");
+
+        Picturelist rappeur = new Picturelist("Rappeur");
+        rappeur.addToPicturelist(ninho);
+        rappeur.addToPicturelist(leto);
+        rappeur.addToPicturelist(fc);
+        rappeur.addToPicturelist(hamza);
+        rappeur.addToPicturelist(eminem);
+        rappeur.addToPicturelist(drake);
+        rappeur.addToPicturelist(alpha);
+        rappeur.addToPicturelist(damso);
+        rappeur.addToPicturelist(niska);
+        rappeur.addToPicturelist(pnl2);
+
+        PicturelistService.setCurrentPicturelist(rappeur);
+        PicturelistService.addToPicturelists(rappeur);
 
         Game game = new Game(rap, "Partie 1");
         GameService.addGameToList(game);

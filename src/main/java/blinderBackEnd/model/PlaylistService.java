@@ -14,7 +14,6 @@ public class PlaylistService {
     private static ArrayList<Integer> randomValues = new ArrayList<>();
     public static MediaPlayer mediaPlayer;
     private static ArrayList<Playlist> playlists = new ArrayList<>();
-    private static int numberOfRounds;
 
     public static void playRandomSongFromPlaylist(Playlist playlist){
         int i = randomValues.get(GameService.getRound_cpt());
@@ -80,10 +79,5 @@ public class PlaylistService {
         } else {
             return false;
         }
-    }
-
-
-    public static void setNumberOfRounds(int numberOfRounds) {
-        PlaylistService.numberOfRounds = numberOfRounds;
     }
 }

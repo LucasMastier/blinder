@@ -1,7 +1,10 @@
 package blinderBackEnd.model;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,44 +12,42 @@ public class PicturelistService {
     private static Picturelist currentPicturelist;
     private static Picture currentPicture;
     private static ArrayList<Integer> randomValues = new ArrayList<>();
-    //public static MediaPlayer mediaPlayer;
     private static ArrayList<Picturelist> picturelists = new ArrayList<>();
 
-    public static void printRandomPictureFromPicturelist(Picturelist picturelist){
-        int randomNumber = (int)(Math.random() * ((picturelist.getPicturelist().size())));
-        Picture randomPicture = picturelist.getPicturelist().get(randomNumber);
+    public static void printRandomPictureFromPicturelist(Picturelist picturelist) throws MalformedURLException {
+        int i = randomValues.get(GameService.getRound_cpt());
+        Picture randomPicture = picturelist.getPicturelist().get(i);
         currentPicture = randomPicture;
-        printPictureFromPicturelist(randomPicture.getPathToFile());
+        //printPictureFromPicturelist(randomPicture.getPathToFile());
     }
 
     public static void addToPicturelists(Picturelist picturelist){
         picturelists.add(picturelist);
     }
 
-    public static Image printPictureFromPicturelist(String path){
-        Image image = new Image("file:JavaFXModule/src/main/java/com/example/javafxmodule/images/icon_slack_hash_colored.png");
+    /*public static Image printPictureFromPicturelist(String path) throws MalformedURLException {
+        Image image = new Image(new File(path).toURI().toURL().toString());
         return image;
-    }
+    }*/
+
     public static void initializeRandomValues(){
         randomValues.clear();
 
-        int picturelistSize = PicturelistService.getCurrentPicturelist().getPicturelist().size();
-        for (int i = 0; i < picturelistSize; i++) {
+        for (int i = 0; i < currentPicturelist.getPicturelist().size(); i++) {
             randomValues.add(i);
-            //System.out.println(i);
         }
         Collections.shuffle(randomValues);
 
     }
+
     public static ArrayList<String> getRandomAuthorFromPicturelist(Picturelist picturelist){
         ArrayList<String> randomAuthors = new ArrayList<>();
 
-        initializeRandomValues();
-
-        for(int i = 0; i < 4; i++){
-            randomAuthors.add(picturelist.getPicturelist().get(randomValues.get(i)).getAuteur());
+        for(int i = 0; i < currentPicturelist.getPicturelist().size(); i++){
+            randomAuthors.add(picturelist.getPicturelist().get(i).getAuteur());
 
         }
+        Collections.shuffle(randomAuthors);
         return randomAuthors;
     }
 

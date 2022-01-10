@@ -1,6 +1,6 @@
 package blinderGUI;
 
-import blinderBackEnd.model.GameService;
+import blinderBackEnd.model.*;
 import blinderBackEnd.model.PlaylistService;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -16,12 +16,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static blinderBackEnd.model.PicturelistService.getRandomAuthorFromPicturelist;
 import static blinderBackEnd.model.PlaylistService.getRandomAuthorFromPlaylist;
+import static blinderGUI.Main.switchTo;
 
 public class TrainingGameImageController {
 
@@ -32,14 +36,18 @@ public class TrainingGameImageController {
     private Label answerLabel;
 
     @FXML
-    private ImageView imageView;
+    ImageView imageView;
 
     private List<Button> buttonList = new ArrayList<>();
 
     @FXML
-    public void initialize(){
+    public void initialize() throws MalformedURLException {
+
         int compt = 0;
-        ArrayList<String> author = getRandomAuthorFromPlaylist(PlaylistService.getCurrentPlaylist());
+        if(GameService.getRound_cpt()==0){
+            PicturelistService.initializeRandomValues();
+        }
+        ArrayList<String> author = getRandomAuthorFromPicturelist(PicturelistService.getCurrentPicturelist());
         while(compt != 4){
 
             Button button = new Button(author.get(compt));
@@ -47,36 +55,51 @@ public class TrainingGameImageController {
 
                 @Override
                 public void handle(Event event) {
-                    if(PlaylistService.checkAuthor(button.getText())){
+                    if(PicturelistService.checkAuthor(button.getText())){
                         answerLabel.setText("Bonne réponse !");
                         GameService.setScore_cpt(GameService.getScore_cpt()+1);
                         GameService.setRound_cpt(GameService.getRound_cpt()+1);
+
+
                         if(GameService.getRound_cpt()==5){
-                            //GameService.setRound_cpt(0); dans le switch
                             //switchTo tableau des scores
-                            //print score
-                            //ajout btn "retry" ?
-                        }
-                        try {
-                            TimeUnit.SECONDS.sleep(3);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Stage stage = (Stage) button.getScene().getWindow();
-                        stage.close();
+                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingScore.fxml"));
 
+                            //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load(),800,500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
-                        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGameImage.fxml"));
-                        Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene scene = null;
-                        try {
-                            scene = new Scene(fxmlLoader.load(),800,500);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            stage.setScene(scene);
+                            stage.show();
+                            GameService.setRound_cpt(0);
+
+                        } else {
+                            try {
+                                TimeUnit.SECONDS.sleep(3);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Stage stage = (Stage) button.getScene().getWindow();
+                            stage.close();
+
+                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+                            Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load(),800,500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            newStage.setScene(scene);
+                            newStage.show();
                         }
 
-                        newStage.setScene(scene);
-                        newStage.show();
 
 
                     } else {
@@ -84,29 +107,44 @@ public class TrainingGameImageController {
                         GameService.setRound_cpt(GameService.getRound_cpt()+1);
 
                         if(GameService.getRound_cpt()==5){
-                            //GameService.setRound_cpt(0); dans le switch
                             //switchTo tableau des scores
-                            //print score
-                        }
-                        try {
-                            TimeUnit.SECONDS.sleep(3);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Stage stage = (Stage) button.getScene().getWindow();
-                        stage.close();
+                            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("TrainingScore.fxml"));
 
-                        FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
-                        Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene scene = null;
-                        try {
-                            scene = new Scene(fxmlLoader.load(),800,500);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            //Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load(),800,500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            stage.setScene(scene);
+                            stage.show();
+                            GameService.setRound_cpt(0);
+
+                        } else {
+                            try {
+                                TimeUnit.SECONDS.sleep(3);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Stage stage = (Stage) button.getScene().getWindow();
+                            stage.close();
+
+                            FXMLLoader fxmlLoader = new FXMLLoader(MainMenuController.class.getResource("TrainingGame.fxml"));
+                            Stage newStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load(),800,500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            newStage.setScene(scene);
+                            newStage.show();
                         }
 
-                        newStage.setScene(scene);
-                        newStage.show();
                     }
                 }
 
@@ -117,20 +155,27 @@ public class TrainingGameImageController {
         }
         buttonsContainer.getChildren().clear();
         buttonsContainer.getChildren().addAll(buttonList);
-        PlaylistService.playRandomSongFromPlaylist(PlaylistService.getCurrentPlaylist());
+        PicturelistService.printRandomPictureFromPicturelist(PicturelistService.getCurrentPicturelist());
+
+        Image image = new Image(PicturelistService.getCurrentPicture().getPathToFile());
+
+        imageView.setImage(image);
+
         boolean goodAnswerIsAvailable = false;
         for(int i = 0; i < buttonList.size(); i++){
-            if(buttonList.get(i).getText().equals(PlaylistService.getCurrentSong().getAuteur())){
+            if(buttonList.get(i).getText().equals(PicturelistService.getCurrentPicture().getAuteur())){
                 goodAnswerIsAvailable = true;
             }
         }
         if(!goodAnswerIsAvailable){
             int random = (int) (Math.random() * buttonList.size());
-            buttonList.get(random).setText(PlaylistService.getCurrentSong().getAuteur());
+            buttonList.get(random).setText(PicturelistService.getCurrentPicture().getAuteur());
         }
 
     }
 
+    public void printPicture(ActionEvent event){
+        //PicturelistService.printPictureFromPicturelist();
+    }
 
-    
 }
