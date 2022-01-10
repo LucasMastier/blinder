@@ -22,6 +22,10 @@ public class Server {
         return games;
     }
 
+    public static ArrayList<ClientHandler> getClients(){
+        return clients;
+    }
+
     public static void main(String[] args) throws IOException {
 
         ServerSocket listener = new ServerSocket(PORT);
@@ -62,7 +66,7 @@ public class Server {
             System.out.println("[Server] Waiting client connection");
             Socket client = listener.accept();
             System.out.println("[Server] Connected to client!");
-            ClientHandler clientThread = new ClientHandler(client, clients);
+            ClientHandler clientThread = new ClientHandler(client);
             clients.add(clientThread);
             pool.execute(clientThread);
             for(ClientHandler aClient : clients){

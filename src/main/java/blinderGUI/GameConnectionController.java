@@ -60,6 +60,7 @@ public class GameConnectionController {
         this.in = in;
         this.out = out;
         currentGame = game;
+        GameService.setCurrentGame(game);
     }
 
 
@@ -137,6 +138,36 @@ public class GameConnectionController {
             updateConnectedPlayers();
 
 
+
+            Service<Void> backgroundThreadUpdatePlayersList = new Service<Void>() {
+                @Override
+                protected Task<Void> createTask() {
+                    return new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            while(true){
+                                System.out.println(in);
+                                System.out.println("avant in");
+                                Game currentGameUpdated = (Game) in.readObject();
+                                System.out.println("apres in");
+                                System.out.println("Received updated game "+currentGameUpdated.getName()+" from server");
+
+                                GameService.setCurrentGame(currentGameUpdated);
+                                updateConnectedPlayers();
+                            }
+
+
+                        }
+                    };
+                }
+            };
+
+            backgroundThreadUpdatePlayersList.restart();
+
+            Request request2 = new Request("UpdatePlayersList", GameService.getCurrentGame());
+            out.writeObject(request2);
+
+
             isConnected = true;
         } else {
             warning.setText("Vous êtes déjà connecté en tant que "+currentPlayer.getUsername()+" !");
@@ -155,17 +186,28 @@ public class GameConnectionController {
 
     public void updateConnectedPlayers(){
         playersContainer.getChildren().clear();
-        for(Player player : currentGame.getPlayersList()){
+        for(Player player : GameService.getCurrentGame().getPlayersList()){
             playersContainer.getChildren().add(new Label(player.getUsername()));
         }
     }
 
+    public void printListPlayers(){
+        for(Player player : GameService.getCurrentGame().getPlayersList()){
+            System.out.println(player.getUsername()+" est présent dans la partie");
+        }
+
+    }
+
     @FXML
     public void updateConnectedPlayersOnClick(ActionEvent event) throws IOException, ClassNotFoundException {
-            Request request = new Request("UpdatePlayersList", currentGame);
-            out.writeObject(request);
-            ArrayList<Player> updatedPlayersList = (ArrayList<Player>) in.readObject();
 
+
+
+
+
+        /*
+
+            ArrayList<Player> updatedPlayersList = (ArrayList<Player>) in.readObject();
 
 
             currentGame.setPlayersList(updatedPlayersList);
@@ -179,7 +221,7 @@ public class GameConnectionController {
                 playersContainer.getChildren().add(new Label(player.getUsername()));
             }*/
 
-            System.out.println("Fin du thread");
+            //System.out.println("Fin du thread");
     }
 
 

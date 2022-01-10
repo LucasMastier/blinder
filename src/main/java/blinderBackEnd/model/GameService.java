@@ -8,6 +8,8 @@ public class GameService {
 
     private static int score_cpt=0;
 
+    private static Game currentGame;
+
     private static ArrayList<Game> games = new ArrayList<>();
 
     public static void addGameToList(Game game){
@@ -16,6 +18,14 @@ public class GameService {
 
     public static ArrayList<Game> getGamesList(){
         return games;
+    }
+
+    public static Game getCurrentGame(){
+        return currentGame;
+    }
+
+    public static void setCurrentGame(Game game){
+        currentGame = game;
     }
 
     public static int getRound_cpt(){return round_cpt;}

@@ -13,11 +13,9 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
-    private ArrayList<ClientHandler> clients;
 
-    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> clients) throws IOException {
+    public ClientHandler(Socket clientSocket) throws IOException {
         this.client = clientSocket;
-        this.clients = clients;
         in = new ObjectInputStream(client.getInputStream());
         out = new ObjectOutputStream(client.getOutputStream());
     }
@@ -33,7 +31,7 @@ public class ClientHandler implements Runnable {
                 Request request = (Request) in.readObject();
 
                 switch(request.getMessage()){
-                    /*case"AddPlayerToGame":
+                    case"AddPlayerToGame":
                         System.out.println("Received player "+request.getPlayer().getUsername()+" from client");
                         for(Game serverGame : Server.getGames()){
                             System.out.println(serverGame.getName());
@@ -44,19 +42,8 @@ public class ClientHandler implements Runnable {
                         }
                         //updateAllGamePlayersList(request.getGame());
 
-                        break;*/
-
-                    case"AddPlayerToGame":
-                        System.out.println("Received player "+request.getPlayer().getUsername()+" from client");
-                        for(Game serverGame : Server.getGames()) {
-                            System.out.println(serverGame.getName());
-                            if (serverGame.getName().equals(request.getGame().getName())) {
-                                serverGame.addPlayer(request.getPlayer());
-                                Request updateClientPlayersList = new Request("UpdatePlayersList", serverGame);
-                                out.writeObject(updateClientPlayersList);
-                            }
-                        }
                         break;
+
 
                     case"test":
                         System.out.println("test reussi");
@@ -68,7 +55,7 @@ public class ClientHandler implements Runnable {
                                 for(Player player : serverGame.getPlayersList()){
                                     System.out.println(player.getUsername()+" is connected to "+serverGame.getName());
                                 }
-                                out.writeObject(serverGame.getPlayersList());
+                                updateAllGamePlayersList(serverGame);
                             }
                         }
                         break;
@@ -90,22 +77,21 @@ public class ClientHandler implements Runnable {
     }
 
     private void outToAll(String string) {
-        for(ClientHandler client : clients){
+        for(ClientHandler client : Server.getClients()){
             //client.out.println(string);
         }
     }
 
-    /*private void updateAllGamePlayersList(Game game) throws IOException {
-        System.out.println(games.get(0).getPlayersList().get(0).getUsername()+" est dans la partie");
-        for(ClientHandler client : clients){
+    private void updateAllGamePlayersList(Game game) throws IOException {
+        for(ClientHandler client : Server.getClients()){
             client.out.writeObject(game.getPlayersList());
             System.out.println("Updated players list for "+client);
         }
+        System.out.println("Joueurs présents :");
         for(Player player : game.getPlayersList()){
-            System.out.println("Joueurs présents :");
             System.out.println(player.getUsername());
         }
-    }*/
+    }
 
     /*
     public synchronized void sendMessage(String val){
