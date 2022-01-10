@@ -1,0 +1,34 @@
+* {
+    -fx-font: 16px "Lato Light";
+
+
+    /* CSS HEX */
+    turquoise-blue: #7cfef0ff;
+    medium-spring-green: #6bffb8ff;
+    medium-spring-green-2: #2ceaa3ff;
+    spanish-green: #28965aff;
+    hunter-green: #2a6041ff;
+
+
+    -fx-text-fill : turquoise-blue;
+}
+
+.inputs{
+    -fx-background-color: turquoise-blue, #2f2d2f;
+    -fx-background-insets: 0, 1 0 0 0 ;
+}
+
+.text-field{
+    -fx-background-color: melon, #2f2d2f;
+    -fx-background-insets: 0, 1 0 0 0 ;
+}
+
+
+.button{
+    -fx-background-color : spanish-green;
+}
+
+
+.background{
+    -fx-background-color : hunter-green;
+}
