@@ -38,7 +38,9 @@ public class TrainingGameController {
     public void initialize(){
         int compt = 0;
         PlaylistService.setNumberOfRounds(5);
-        PlaylistService.initializeRandomValues();
+        if(GameService.getRound_cpt()==0){
+            PlaylistService.initializeRandomValues();
+        }
         ArrayList<String> author = getRandomAuthorFromPlaylist(PlaylistService.getCurrentPlaylist());
         while(compt != 4){
 
